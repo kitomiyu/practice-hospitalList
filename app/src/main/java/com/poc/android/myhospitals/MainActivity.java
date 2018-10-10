@@ -1,5 +1,6 @@
 package com.poc.android.myhospitals;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        setupViewFragment();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -26,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void setupViewFragment() {
+
+        MainActivityFragment mainActivityFragment = new MainActivityFragment();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment, mainActivityFragment)
+                .commit();
     }
 
     @Override
