@@ -19,7 +19,7 @@ public class Item {
     @ColumnInfo(name= "item")
     private String mItem;
 
-    public Item(@Nullable String item) {this.mItem = item;}
+    public Item(@NonNull String item) {this.mItem = item;}
 
     public String getItem() {return this.mItem;}
 }
