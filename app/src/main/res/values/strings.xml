@@ -2,5 +2,7 @@
     <string name="app_name">MyHospitals</string>
     <string name="action_settings">Settings</string>
 
+    <string name="hint_item">Title…</string>
+    <string name="button_save">Save</string>
     <string name="no_item">No item</string>
 </resources>
