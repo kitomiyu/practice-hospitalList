@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 public class MainActivity extends AppCompatActivity {
 
     private ItemViewModel mItemViewModel;
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Timber.plant(new Timber.DebugTree());
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -88,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        
+
+        Timber.v("ActivityResult: " + data.getStringExtra(NewItemActivity.EXTRA_REPLY));
+
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY));
             mItemViewModel.insert(item);
