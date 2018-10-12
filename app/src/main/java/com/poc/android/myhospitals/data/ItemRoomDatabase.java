@@ -1,4 +1,4 @@
-package com.poc.android.myhospitals;
+package com.poc.android.myhospitals.data;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;

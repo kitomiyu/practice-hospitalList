@@ -4,6 +4,10 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.poc.android.myhospitals.data.Item;
+import com.poc.android.myhospitals.data.ItemDao;
+import com.poc.android.myhospitals.data.ItemRoomDatabase;
+
 import java.util.List;
 
 public class ItemRepository {
