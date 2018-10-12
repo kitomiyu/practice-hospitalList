@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">MyHospitals</string>
-    <string name="action_settings">Settings</string>
 
+    //Used in menu
+    <string name="clear_all_data">Clear all data</string>
+    <string name="clear_data_toast_text">Clear the data now!</string>
+
+    //Used in Activity
+    <string name="empty_not_saved">Word not saved because it is empty.</string>
     <string name="hint_item">Title…</string>
     <string name="button_save">Save</string>
     <string name="no_item">No item</string>
