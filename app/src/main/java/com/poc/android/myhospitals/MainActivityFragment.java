@@ -1,9 +1,13 @@
 package com.poc.android.myhospitals;
 
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.WindowDecorActionBar;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -16,10 +20,12 @@ import com.poc.android.myhospitals.data.Item;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements ItemListAdapter.ListItemClickListener {
 
     private ItemViewModel mItemViewModel;
 
@@ -33,7 +39,8 @@ public class MainActivityFragment extends Fragment {
 
         // setup the RecyclerView
         RecyclerView recyclerView = rootView.findViewById(R.id.mainRecyclerView);
-        final ItemListAdapter adapter = new ItemListAdapter(getContext());
+        final ItemListAdapter adapter = new ItemListAdapter(getContext(), this);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -72,4 +79,8 @@ public class MainActivityFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Timber.v("item is clicked " + position);
+    }
 }
