@@ -13,11 +13,21 @@ import com.poc.android.myhospitals.data.Item;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
 
     final Context mContext;
+    final private ListItemClickListener mClickListener;
     private final LayoutInflater mInflater;
     List<Item> mItems;
+
+    /**
+     * The interface that receives onClick messages.
+     */
+    public interface ListItemClickListener {
+        void onItemClick(int position);
+    }
 
     @NonNull
     @Override
@@ -34,6 +44,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         } else {
             holder.listItemView.setText(R.string.no_item);
         }
+
     }
 
     void setItems(List<Item> items) {
@@ -48,19 +59,29 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         else return 0;
     }
 
-    public ItemListAdapter(Context context) {
+    public ItemListAdapter(Context context, ListItemClickListener clickListener) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        mClickListener = clickListener;
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+
+    class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView listItemView;
         private final ImageView imageItemView;
 
-        private ItemViewHolder(View itemView) {
+        private ItemViewHolder(final View itemView) {
             super(itemView);
             listItemView = itemView.findViewById(R.id.itemName);
             imageItemView = itemView.findViewById(R.id.imageView);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            mClickListener.onItemClick(adapterPosition);
         }
     }
 
