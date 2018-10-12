@@ -91,9 +91,6 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Timber.v("ActivityResult: " + data.getStringExtra(NewItemActivity.EXTRA_REPLY));
-        Timber.v("ActivityResult2: " + data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
-
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
             viewModel.insert(item);
