@@ -63,4 +63,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             imageItemView = itemView.findViewById(R.id.imageView);
         }
     }
+
+    public Item getItemAtPosition(int position) {
+        return mItems.get(position);
+    }
 }
