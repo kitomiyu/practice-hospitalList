@@ -3,7 +3,8 @@ package com.poc.android.myhospitals;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+
+import com.poc.android.myhospitals.data.Item;
 
 import java.util.List;
 
