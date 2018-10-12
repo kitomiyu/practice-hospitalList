@@ -44,13 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, NewItemActivity.class);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
-
             }
         });
     }
 
     private void setupViewFragment() {
-
         MainActivityFragment mainActivityFragment = new MainActivityFragment();
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -87,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             viewModel.deleteAll();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -103,5 +100,4 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }
     }
-
 }

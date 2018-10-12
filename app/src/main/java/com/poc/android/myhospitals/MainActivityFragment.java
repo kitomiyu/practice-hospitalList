@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.poc.android.myhospitals.data.Item;
 
@@ -44,6 +46,29 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
+        // Add the functionality to swipe items in the
+        // recycler view to delete that item
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                        final int fromPos = viewHolder.getAdapterPosition();
+//                        final int toPos = target.getAdapterPosition();
+//                        adapter.notifyItemMoved(fromPos, toPos);
+//
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                        final int fromPos = viewHolder.getAdapterPosition();
+                        Item myItem = adapter.getItemAtPosition(fromPos);
+
+                        // delete the item
+                        mItemViewModel.deleteItem(myItem);
+                    }
+                });
+        helper.attachToRecyclerView(recyclerView);
         return rootView;
     }
 
