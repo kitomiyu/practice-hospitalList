@@ -78,7 +78,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.clear_data) {
+            // Add a toast just for confirmation
+            Toast.makeText(this, R.string.clear_data_toast_text, Toast.LENGTH_LONG).show();
+            // Delete existing data
+            viewModel.deleteAll();
             return true;
         }
 
@@ -94,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY));
             viewModel.insert(item);
         } else {
-            Toast.makeText(this, "Item not saved because it's empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }
     }
 
