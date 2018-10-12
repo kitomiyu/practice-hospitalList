@@ -92,9 +92,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         Timber.v("ActivityResult: " + data.getStringExtra(NewItemActivity.EXTRA_REPLY));
+        Timber.v("ActivityResult2: " + data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY));
+            Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
             viewModel.insert(item);
         } else {
             Toast.makeText(this, R.string.empty_not_saved, Toast.LENGTH_LONG).show();
