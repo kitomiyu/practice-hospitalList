@@ -80,7 +80,12 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
     }
 
     @Override
-    public void onItemClick(int position) {
-        Timber.v("item is clicked " + position);
+    public void onItemClick(String url) {
+        Timber.v("item is clicked " + url);
+        Uri webPage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webPage);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }

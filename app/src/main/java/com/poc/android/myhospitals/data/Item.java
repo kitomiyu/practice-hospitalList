@@ -29,6 +29,6 @@ public class Item {
     }
 
     public String getItem() {return this.mItem; }
-
+    
     public String getUrl() {return  this.mUrl; }
 }
