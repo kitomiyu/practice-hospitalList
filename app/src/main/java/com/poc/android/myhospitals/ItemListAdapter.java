@@ -27,7 +27,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
      * The interface that receives onClick messages.
      */
     public interface ListItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(String url);
     }
 
     @NonNull
@@ -84,7 +84,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            mClickListener.onItemClick(adapterPosition);
+            Item current = mItems.get(adapterPosition);
+            mClickListener.onItemClick(current.getUrl().toString());
         }
     }
 
