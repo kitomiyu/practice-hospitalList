@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface ItemDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Item item);
 
     @Query("DELETE FROM item_table")

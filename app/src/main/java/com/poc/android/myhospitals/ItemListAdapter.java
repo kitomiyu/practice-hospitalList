@@ -2,6 +2,7 @@ package com.poc.android.myhospitals;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +42,10 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         if (mItems != null) {
             Item current = mItems.get(position);
             holder.listItemView.setText(current.getItem());
+            holder.listItemUrlView.setText(current.getUrl());
         } else {
             holder.listItemView.setText(R.string.no_item);
+            holder.listItemUrlView.setText(R.string.no_item);
         }
 
     }
@@ -68,12 +71,12 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView listItemView;
-        private final ImageView imageItemView;
+        private final TextView listItemUrlView;
 
         private ItemViewHolder(final View itemView) {
             super(itemView);
             listItemView = itemView.findViewById(R.id.itemName);
-            imageItemView = itemView.findViewById(R.id.imageView);
+            listItemUrlView = itemView.findViewById(R.id.itemUrl);
 
             itemView.setOnClickListener(this);
         }
