@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
-                .add(R.id.fragment, mainActivityFragment)
+                .add(R.id.fragment_container, mainActivityFragment)
                 .commit();
     }
 
