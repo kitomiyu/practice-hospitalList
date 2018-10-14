@@ -85,7 +85,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             Item current = mItems.get(adapterPosition);
-            mClickListener.onItemClick(current.getUrl().toString());
+            mClickListener.onItemClick(current.getUrl());
         }
     }
 
