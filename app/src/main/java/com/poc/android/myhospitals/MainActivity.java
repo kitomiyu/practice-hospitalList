@@ -21,7 +21,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     private static ItemViewModel viewModel;
-    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    public static final int NEW_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewItemActivity.class);
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent,NEW_ACTIVITY_REQUEST_CODE);
             }
         });
     }
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == NEW_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
             viewModel.insert(item);
         } else {
