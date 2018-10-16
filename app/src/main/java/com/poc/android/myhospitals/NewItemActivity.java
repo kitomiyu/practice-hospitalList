@@ -15,8 +15,14 @@ public class NewItemActivity extends AppCompatActivity{
     public static final String EXTRA_REPLY = "com.poc.android.myhospitals.REPLY";
     public static final String EXTRA_REPLY_URL = "com.poc.android.myhospitals.REPLY.URL";
 
+    // Bundle Key
+    public static final String ITEM_NAME = "1";
+    public static final String ITEM_URL = "2";
+    public static final String ITEM_INFO = "3";
+
     private TextInputEditText mEditItemView;
     private TextInputEditText mEditItemViewUrl;
+    private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,8 +31,14 @@ public class NewItemActivity extends AppCompatActivity{
 
         mEditItemView = findViewById(R.id.edit_item);
         mEditItemViewUrl = findViewById(R.id.edit_item_url);
+        button = findViewById(R.id.button_save);
 
-        final Button button = findViewById(R.id.button_save);
+        Bundle bundle = getIntent().getBundleExtra(ITEM_INFO);
+
+        if (bundle != null){
+            mEditItemView.setText(bundle.getString(ITEM_NAME));
+            mEditItemViewUrl.setText(bundle.getString(ITEM_URL));
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

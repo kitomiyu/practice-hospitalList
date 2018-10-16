@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static ItemViewModel viewModel;
     public static final int NEW_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NEW_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
             viewModel.insert(item);
+        } else if (requestCode == EDIT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Toast.makeText(this, R.string.item_edited, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, R.string.empty_not_saved, Toast.LENGTH_LONG).show();
         }
