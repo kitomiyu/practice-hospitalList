@@ -1,6 +1,7 @@
 package com.poc.android.myhospitals;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
@@ -23,11 +24,15 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     private final LayoutInflater mInflater;
     List<Item> mItems;
 
+    // Bundle Key
+    public static final String ITEM_NAME = "1";
+    public static final String ITEM_URL = "2";
+
     /**
      * The interface that receives onClick messages.
      */
     public interface ListItemClickListener {
-        void onItemClick(String url);
+        void onItemClick(Bundle bundle);
     }
 
     @NonNull
@@ -85,7 +90,15 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             Item current = mItems.get(adapterPosition);
-            mClickListener.onItemClick(current.getUrl());
+
+            String mItem = current.getItem();
+            String mUrl = current.getUrl();
+            Bundle bundle = new Bundle();
+
+            bundle.putString(ITEM_NAME, mItem);
+            bundle.putString(ITEM_URL, mUrl);
+
+            mClickListener.onItemClick(bundle);
         }
     }
 

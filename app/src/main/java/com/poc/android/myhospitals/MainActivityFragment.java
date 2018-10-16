@@ -28,7 +28,10 @@ import timber.log.Timber;
 public class MainActivityFragment extends Fragment implements ItemListAdapter.ListItemClickListener {
 
     private ItemViewModel mItemViewModel;
-    public static final int NEW_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
+
+    // Bundle Key
+    public static final String ITEM_INFO = "3";
 
     public MainActivityFragment() {
     }
@@ -81,14 +84,14 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
     }
 
     @Override
-    public void onItemClick(String url) {
-        Timber.v("item is clicked " + url);
+    public void onItemClick(Bundle bundle) {
 //        Uri webPage = Uri.parse(url);
 //        Intent intent = new Intent(Intent.ACTION_VIEW, webPage);
 //        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
 //            startActivity(intent);
 //        }
         Intent intent = new Intent(getActivity(), NewItemActivity.class);
-        startActivityForResult(intent, NEW_ACTIVITY_REQUEST_CODE);
+        intent.putExtra(ITEM_INFO, bundle);
+        getActivity().startActivityForResult(intent, EDIT_ACTIVITY_REQUEST_CODE);
     }
 }

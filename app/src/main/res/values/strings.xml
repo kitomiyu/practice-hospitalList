@@ -7,6 +7,7 @@
 
     //Used in Activity
     <string name="empty_not_saved">Item not saved because it is empty.</string>
+    <string name="item_edited">Item is edited successfully.</string>
     <string name="hint_item">Title…</string>
     <string name="button_save">Save</string>
     <string name="no_item">No item</string>
