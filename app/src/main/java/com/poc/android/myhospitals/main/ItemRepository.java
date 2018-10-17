@@ -1,4 +1,4 @@
-package com.poc.android.myhospitals;
+package com.poc.android.myhospitals.main;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;

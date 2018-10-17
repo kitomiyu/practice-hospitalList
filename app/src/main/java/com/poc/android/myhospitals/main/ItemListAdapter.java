@@ -1,21 +1,18 @@
-package com.poc.android.myhospitals;
+package com.poc.android.myhospitals.main;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
 
 import java.util.List;
-
-import timber.log.Timber;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
 

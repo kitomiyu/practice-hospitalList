@@ -1,10 +1,9 @@
-package com.poc.android.myhospitals;
+package com.poc.android.myhospitals.main;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import com.poc.android.myhospitals.itemdetails.NewItemActivity;
+import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
 
 import timber.log.Timber;
