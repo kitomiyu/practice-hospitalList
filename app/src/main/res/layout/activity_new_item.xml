@@ -13,7 +13,7 @@
             android:id="@+id/edit_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title Name"/>
+            android:hint="@string/item_title"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -24,13 +24,13 @@
             android:id="@+id/edit_item_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="URL"/>
+            android:hint="@string/item_url"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"/>
+        android:text="@string/button_add"/>
 
 </LinearLayout>

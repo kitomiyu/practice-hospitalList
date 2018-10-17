@@ -1,4 +1,4 @@
-package com.poc.android.myhospitals;
+package com.poc.android.myhospitals.itemdetails;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.poc.android.myhospitals.R;
 
 public class NewItemActivity extends AppCompatActivity{
 
