@@ -2,6 +2,7 @@ package com.poc.android.myhospitals.main;
 
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -57,14 +58,14 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
         // Add the functionality to swipe items in the
         // recycler view to delete that item
         ItemTouchHelper helper = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                     @Override
                     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-//                        final int fromPos = viewHolder.getAdapterPosition();
-//                        final int toPos = target.getAdapterPosition();
-//                        adapter.notifyItemMoved(fromPos, toPos);
-//
-                        return false;
+                        final int fromPos = viewHolder.getAdapterPosition();
+                        final int toPos = target.getAdapterPosition();
+                        adapter.notifyItemMoved(fromPos, toPos);
+
+                        return true;
                     }
 
                     @Override
