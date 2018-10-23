@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -106,8 +107,9 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                         (float) itemView.getBottom(), p);
                             } else {
                                 /* Set color for negative displacement */
-                                p.setColor(Color.RED);
-
+                                int color = ContextCompat.getColor(getContext(), R.color.colorDarkRed);
+                                p.setColor(color);
+                                
                                 // Draw Rect with varying left side, equal to the item's right side plus negative displacement dX
                                 c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
                                         (float) itemView.getRight(), (float) itemView.getBottom(), p);
