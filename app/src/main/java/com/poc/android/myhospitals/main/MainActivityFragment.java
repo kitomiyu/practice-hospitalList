@@ -2,14 +2,19 @@ package com.poc.android.myhospitals.main;
 
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.poc.android.myhospitals.Util.ResourceUtil;
 import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
@@ -98,6 +104,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                             // Get RecyclerView item from the ViewHolder
                             View itemView = viewHolder.itemView;
                             Paint p = new Paint();
+
                             if (dX > 0) {
                                 /* Set color for positive displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarKGreen);
@@ -106,14 +113,21 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                 // Draw Rect with varying right side, equal to displacement dX
                                 c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), dX,
                                         (float) itemView.getBottom(), p);
+
                             } else {
                                 /* Set color for negative displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarkRed);
                                 p.setColor(color);
-                                
+
                                 // Draw Rect with varying left side, equal to the item's right side plus negative displacement dX
                                 c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
                                         (float) itemView.getRight(), (float) itemView.getBottom(), p);
+
+                                Bitmap bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_delete);
+                                float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
+
+                                c.drawBitmap(bitmap, (float) itemView.getRight() - bitmap.getWidth(), (float) itemView.getTop() + height, p);
+
                             }
                             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                         }
