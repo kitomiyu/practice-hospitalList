@@ -2,19 +2,14 @@ package com.poc.android.myhospitals.main;
 
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +31,7 @@ import java.util.List;
 public class MainActivityFragment extends Fragment implements ItemListAdapter.ListItemClickListener {
 
     private ItemViewModel mItemViewModel;
-    public static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
+    private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
     Bundle mBundle;
 
     // Bundle Key

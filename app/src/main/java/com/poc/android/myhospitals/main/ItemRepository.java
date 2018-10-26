@@ -10,7 +10,7 @@ import com.poc.android.myhospitals.data.ItemRoomDatabase;
 
 import java.util.List;
 
-public class ItemRepository {
+class ItemRepository {
 
     private ItemDao mItemDao;
     private LiveData<List<Item>> mAllItems;
