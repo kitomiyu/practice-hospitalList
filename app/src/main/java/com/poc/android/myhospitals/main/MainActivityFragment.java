@@ -85,31 +85,31 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
                             // delete the item
                             mItemViewModel.deleteItem(myItem);
-                        } else { // LEFT to RIGHT :: edit item
-                            Intent intent = new Intent(getActivity(), NewItemActivity.class);
-                            intent.putExtra(ITEM_INFO, mBundle);
-                            getActivity().startActivityForResult(intent, EDIT_ACTIVITY_REQUEST_CODE);
                         }
                     }
 
                     @Override
                     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
+                        float mdX = dX;
+
                         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                             // Get RecyclerView item from the ViewHolder
                             View itemView = viewHolder.itemView;
                             Paint p = new Paint();
 
+                            // LEFT to RIGHT :: edit item
                             if (dX > 0) {
+                                mdX = dX / 4;
                                 /* Set color for positive displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarKGreen);
                                 p.setColor(color);
 
                                 // Draw Rect with varying right side, equal to displacement dX
-                                c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), dX,
+                                c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), mdX,
                                         (float) itemView.getBottom(), p);
 
-                            } else {
+                            } else { // RIGHT to LEFT :: delete item
                                 /* Set color for negative displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarkRed);
                                 p.setColor(color);
@@ -122,9 +122,8 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                 float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
 
                                 c.drawBitmap(bitmap, (float) itemView.getRight() - bitmap.getWidth(), (float) itemView.getTop() + height, p);
-
                             }
-                            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                            super.onChildDraw(c, recyclerView, viewHolder,  mdX, dY, actionState, isCurrentlyActive);
                         }
                     }
                 });
