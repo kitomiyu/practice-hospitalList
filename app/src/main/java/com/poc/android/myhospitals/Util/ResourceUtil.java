@@ -3,7 +3,6 @@ package com.poc.android.myhospitals.Util;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -42,7 +41,7 @@ public class ResourceUtil {
         } else if (drawable instanceof VectorDrawable) {
             return getBitmap((VectorDrawable) drawable);
         } else {
-            throw new IllegalArgumentException("Unsupported drawable type");
+            throw new IllegalArgumentException("unsupported error");
         }
     }
 }

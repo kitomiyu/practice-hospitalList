@@ -16,14 +16,14 @@ import java.util.List;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
 
-    final Context mContext;
+    private final Context mContext;
     final private ListItemClickListener mClickListener;
     private final LayoutInflater mInflater;
-    List<Item> mItems;
+    private List<Item> mItems;
 
     // Bundle Key
-    public static final String ITEM_NAME = "1";
-    public static final String ITEM_URL = "2";
+    private static final String ITEM_NAME = "1";
+    private static final String ITEM_URL = "2";
 
     /**
      * The interface that receives onClick messages.

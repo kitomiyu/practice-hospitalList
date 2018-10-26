@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.poc.android.myhospitals.R;
 
@@ -18,13 +17,12 @@ public class NewItemActivity extends AppCompatActivity{
     public static final String EXTRA_REPLY_URL = "com.poc.android.myhospitals.REPLY.URL";
 
     // Bundle Key
-    public static final String ITEM_NAME = "1";
+    private static final String ITEM_NAME = "1";
     public static final String ITEM_URL = "2";
     public static final String ITEM_INFO = "3";
 
     private TextInputEditText mEditItemView;
     private TextInputEditText mEditItemViewUrl;
-    private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class NewItemActivity extends AppCompatActivity{
 
         mEditItemView = findViewById(R.id.edit_item);
         mEditItemViewUrl = findViewById(R.id.edit_item_url);
-        button = findViewById(R.id.button_save);
+        Button button = findViewById(R.id.button_save);
 
         Bundle bundle = getIntent().getBundleExtra(ITEM_INFO);
 

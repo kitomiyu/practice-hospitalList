@@ -12,6 +12,7 @@
     <string name="button_save">Save</string>
     <string name="no_item">No item</string>
     <string name="delete_word_preamble">Deleting </string>
+    <string name="unsupported_error">Unsupported drawable type</string>
 
     //Used in layout files
     <string name="item_title">Title</string>
