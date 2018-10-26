@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.poc.android.myhospitals.Util.ResourceUtil;
-import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
 
@@ -92,15 +91,17 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
                         float mdX = dX;
+                        Bitmap bitmap;
 
                         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                             // Get RecyclerView item from the ViewHolder
                             View itemView = viewHolder.itemView;
                             Paint p = new Paint();
+                            float width = itemView.getHeight() / 5;
 
                             // LEFT to RIGHT :: edit item
                             if (dX > 0) {
-                                mdX = dX / 4;
+                                mdX = dX / 5;
                                 /* Set color for positive displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarKGreen);
                                 p.setColor(color);
@@ -108,6 +109,11 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                 // Draw Rect with varying right side, equal to displacement dX
                                 c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), mdX,
                                         (float) itemView.getBottom(), p);
+
+                                bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_edit);
+                                float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
+
+                                c.drawBitmap(bitmap, (float) itemView.getLeft() + width, (float) itemView.getTop() + height, p);
 
                             } else { // RIGHT to LEFT :: delete item
                                 /* Set color for negative displacement */
@@ -118,10 +124,10 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                 c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
                                         (float) itemView.getRight(), (float) itemView.getBottom(), p);
 
-                                Bitmap bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_delete);
+                                bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_delete);
                                 float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
 
-                                c.drawBitmap(bitmap, (float) itemView.getRight() - bitmap.getWidth(), (float) itemView.getTop() + height, p);
+                                c.drawBitmap(bitmap, (float) itemView.getRight() - (bitmap.getWidth() + width), (float) itemView.getTop() + height, p);
                             }
                             super.onChildDraw(c, recyclerView, viewHolder,  mdX, dY, actionState, isCurrentlyActive);
                         }
