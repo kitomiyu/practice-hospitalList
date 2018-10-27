@@ -15,14 +15,19 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.poc.android.myhospitals.Util.ResourceUtil;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
 
 import java.util.List;
+import java.util.Timer;
+
+import timber.log.Timber;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -76,7 +81,6 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-
                         // RIGHT to LEFT :: delete item
                         if (direction == ItemTouchHelper.LEFT) {
                             final int fromPos = viewHolder.getAdapterPosition();
@@ -89,7 +93,6 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
                     @Override
                     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-
                         float mdX = dX;
                         Bitmap bitmap;
 
@@ -114,7 +117,6 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                 float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
 
                                 c.drawBitmap(bitmap, (float) itemView.getLeft() + width, (float) itemView.getTop() + height, p);
-
                             } else { // RIGHT to LEFT :: delete item
                                 /* Set color for negative displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarkRed);
@@ -129,7 +131,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
                                 c.drawBitmap(bitmap, (float) itemView.getRight() - (bitmap.getWidth() + width), (float) itemView.getTop() + height, p);
                             }
-                            super.onChildDraw(c, recyclerView, viewHolder,  mdX, dY, actionState, isCurrentlyActive);
+                            super.onChildDraw(c, recyclerView, viewHolder, mdX, dY, actionState, isCurrentlyActive);
                         }
                     }
                 });
