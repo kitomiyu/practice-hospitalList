@@ -94,13 +94,13 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                     @Override
                     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                         float mdX = dX;
-                        Bitmap bitmap;
+                        final Bitmap bitmap;
 
                         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                             // Get RecyclerView item from the ViewHolder
-                            View itemView = viewHolder.itemView;
+                            final View itemView = viewHolder.itemView;
                             Paint p = new Paint();
-                            float width = itemView.getHeight() / 5;
+                            final float width = itemView.getHeight() / 5;
 
                             // LEFT to RIGHT :: edit item
                             if (dX > 0) {
@@ -114,9 +114,25 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                         (float) itemView.getBottom(), p);
 
                                 bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_edit);
-                                float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
+                                final float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
 
                                 c.drawBitmap(bitmap, (float) itemView.getLeft() + width, (float) itemView.getTop() + height, p);
+
+                                recyclerView.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        float left = itemView.getLeft() + width;
+                                        float top = itemView.getTop() + height;
+                                        float right = left + bitmap.getWidth();
+                                        float bottom = top + bitmap.getHeight();
+
+                                        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                                            // when user tap edit image, show NewItemActivity
+                                        }
+                                        return false;
+                                    }
+                                });
+
                             } else { // RIGHT to LEFT :: delete item
                                 /* Set color for negative displacement */
                                 int color = ContextCompat.getColor(getContext(), R.color.colorDarkRed);
@@ -134,6 +150,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                             super.onChildDraw(c, recyclerView, viewHolder, mdX, dY, actionState, isCurrentlyActive);
                         }
                     }
+
                 });
         helper.attachToRecyclerView(recyclerView);
         return rootView;
