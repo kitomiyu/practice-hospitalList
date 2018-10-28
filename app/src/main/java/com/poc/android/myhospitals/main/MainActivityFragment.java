@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.poc.android.myhospitals.Util.ResourceUtil;
 import com.poc.android.myhospitals.R;
@@ -26,9 +25,6 @@ import com.poc.android.myhospitals.data.Item;
 import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 
 import java.util.List;
-import java.util.Timer;
-
-import timber.log.Timber;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -101,9 +97,18 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                             // Get RecyclerView item from the ViewHolder
                             final View itemView = viewHolder.itemView;
+
+                            // Get item data
+                            final int fromPos = viewHolder.getAdapterPosition();
+                            Item myItem = adapter.getItemAtPosition(fromPos);
+
+                            final Bundle bundle = new Bundle();
+
+                            bundle.putString(ITEM_NAME, myItem.getItem());
+                            bundle.putString(ITEM_URL, myItem.getUrl());
+
                             Paint p = new Paint();
                             final float width = itemView.getHeight() / 5;
-                            final int adapterPosition = viewHolder.getAdapterPosition();
 
                             // LEFT to RIGHT :: edit item
                             if (dX > 0) {
@@ -127,7 +132,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                                         if (event.getAction() == MotionEvent.ACTION_DOWN) {
                                             // when user tap edit image, show NewItemActivity
                                             Intent intent = new Intent(getActivity(), NewItemActivity.class);
-                                            intent.putExtra(ITEM_INFO, mBundle);
+                                            intent.putExtra(ITEM_INFO, bundle);
                                             getActivity().startActivityForResult(intent, EDIT_ACTIVITY_REQUEST_CODE);
                                         }
                                         return false;

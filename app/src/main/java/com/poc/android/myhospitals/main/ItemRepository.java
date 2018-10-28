@@ -21,23 +21,32 @@ class ItemRepository {
         mAllItems = mItemDao.getAllItems();
     }
 
-    LiveData<List<Item>> getAllItems() { return mAllItems; }
+    LiveData<List<Item>> getAllItems() {
+        return mAllItems;
+    }
 
-    public void insert(Item item) { new insertAsyncTask(mItemDao).execute(item); }
+    public void insert(Item item) {
+        new insertAsyncTask(mItemDao).execute(item);
+    }
 
-    public void deleteAll() { new deleteAllItemsAsyncTask(mItemDao).execute(); }
+    public void deleteAll() {
+        new deleteAllItemsAsyncTask(mItemDao).execute();
+    }
 
-    public void deleteItem(Item item) { new delteItemAsyncTask(mItemDao).execute(item); }
-
+    public void deleteItem(Item item) {
+        new deleteItemAsyncTask(mItemDao).execute(item);
+    }
 
     /**
      * Insert a word into the database.
      */
-    private static class insertAsyncTask extends AsyncTask<Item, Void, Void>{
+    private static class insertAsyncTask extends AsyncTask<Item, Void, Void> {
 
         private ItemDao mAsyncTaskDao;
 
-        public insertAsyncTask(ItemDao dao) { mAsyncTaskDao = dao; }
+        public insertAsyncTask(ItemDao dao) {
+            mAsyncTaskDao = dao;
+        }
 
         @Override
         protected Void doInBackground(Item... items) {
@@ -49,11 +58,13 @@ class ItemRepository {
     /**
      * Delete all words from the database (does not delete the table)
      */
-    private class deleteAllItemsAsyncTask extends AsyncTask<Void, Void, Void>{
+    private class deleteAllItemsAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private ItemDao mAsyncTaskDao;
 
-        public deleteAllItemsAsyncTask(ItemDao dao) { mAsyncTaskDao = dao; }
+        public deleteAllItemsAsyncTask(ItemDao dao) {
+            mAsyncTaskDao = dao;
+        }
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -63,13 +74,15 @@ class ItemRepository {
     }
 
     /**
-     *  Delete a single word from the database.
+     * Delete a single item from the database.
      */
-    private class delteItemAsyncTask extends AsyncTask<Item, Void, Void>{
+    private class deleteItemAsyncTask extends AsyncTask<Item, Void, Void> {
 
         private ItemDao mAsyncTaskDao;
 
-        public delteItemAsyncTask(ItemDao dao) { mAsyncTaskDao = dao; }
+        public deleteItemAsyncTask(ItemDao dao) {
+            mAsyncTaskDao = dao;
+        }
 
         @Override
         protected Void doInBackground(Item... items) {
