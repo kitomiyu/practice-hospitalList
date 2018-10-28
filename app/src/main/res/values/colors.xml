@@ -6,5 +6,6 @@
     <color name="colorPrimaryLight">#64b5f6</color>
     <color name="colorTextPrimary">@android:color/white</color>
     <color name="colorDarkRed">#b71c1c</color>
+    <color name="colorDarKGreen">#2e7d32</color>
 
 </resources>
