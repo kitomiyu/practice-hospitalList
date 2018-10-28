@@ -22,7 +22,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity {
 
     private static ItemViewModel viewModel;
-    public static final int NEW_ACTIVITY_REQUEST_CODE = 1;
+    private static final int NEW_ACTIVITY_REQUEST_CODE = 1;
     public static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
