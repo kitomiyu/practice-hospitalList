@@ -6,8 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-
-import com.poc.android.myhospitals.data.Item;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -29,4 +28,7 @@ public interface ItemDao {
     //LiveData, which is a lifecycle library class for data observation, can help app respond to data changes.
     @Query("SELECT * from item_table ORDER BY item ASC")
     LiveData<List<Item>> getAllItems();
+
+    @Update
+    void update(Item item);
 }

@@ -11,12 +11,14 @@ import android.widget.Button;
 
 import com.poc.android.myhospitals.R;
 
-public class NewItemActivity extends AppCompatActivity{
+public class NewItemActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.poc.android.myhospitals.REPLY";
     public static final String EXTRA_REPLY_URL = "com.poc.android.myhospitals.REPLY.URL";
+    public static final String EXTRA_REPLY_ID = "com.poc.android.myhospitals.REPLY.ID";
 
     // Bundle Key
+    public static final String ITEM_ID = "0";
     private static final String ITEM_NAME = "1";
     public static final String ITEM_URL = "2";
     public static final String ITEM_INFO = "3";
@@ -33,9 +35,9 @@ public class NewItemActivity extends AppCompatActivity{
         mEditItemViewUrl = findViewById(R.id.edit_item_url);
         Button button = findViewById(R.id.button_save);
 
-        Bundle bundle = getIntent().getBundleExtra(ITEM_INFO);
+        final Bundle bundle = getIntent().getBundleExtra(ITEM_INFO);
 
-        if (bundle != null){
+        if (bundle != null) {
             mEditItemView.setText(bundle.getString(ITEM_NAME));
             mEditItemViewUrl.setText(bundle.getString(ITEM_URL));
         }
@@ -55,6 +57,11 @@ public class NewItemActivity extends AppCompatActivity{
                     // Put the new item in the extras for the reply Intent.
                     replyIntent.putExtra(EXTRA_REPLY, item);
                     replyIntent.putExtra(EXTRA_REPLY_URL, itemName);
+
+                    if (bundle != null) {
+                        replyIntent.putExtra(EXTRA_REPLY_ID, bundle.getInt(ITEM_ID));
+                    }
+
                     // Set the result status to indicate success.
                     setResult(RESULT_OK, replyIntent);
                 }
