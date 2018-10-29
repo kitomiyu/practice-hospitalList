@@ -19,10 +19,10 @@ public class Item {
 
     @NonNull
     @ColumnInfo(name = "item")
-    private String mItem;
+    private final String mItem;
 
     @ColumnInfo(name = "url")
-    private String mUrl;
+    private final String mUrl;
 
     @Ignore
     public Item(int id, @NonNull String item, String mUrl) {

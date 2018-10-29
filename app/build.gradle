@@ -36,7 +36,7 @@ dependencies {
     // Lifecycle components
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
-    implementation "android.arch.lifecycle:viewmodel:1.1.0"
+    implementation "android.arch.lifecycle:viewmodel:1.1.1"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 }

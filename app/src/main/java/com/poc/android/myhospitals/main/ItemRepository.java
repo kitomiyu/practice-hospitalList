@@ -12,7 +12,7 @@ import java.util.List;
 
 class ItemRepository {
 
-    private ItemDao mItemDao;
+    private final ItemDao mItemDao;
     private LiveData<List<Item>> mAllItems;
 
     ItemRepository(Application application) {
@@ -48,7 +48,7 @@ class ItemRepository {
 
         private ItemDao mAsyncTaskDao;
 
-        public insertAsyncTask(ItemDao dao) {
+        insertAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -62,11 +62,11 @@ class ItemRepository {
     /**
      * Delete all words from the database (does not delete the table)
      */
-    private class deleteAllItemsAsyncTask extends AsyncTask<Void, Void, Void> {
+    private static class deleteAllItemsAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private ItemDao mAsyncTaskDao;
 
-        public deleteAllItemsAsyncTask(ItemDao dao) {
+        deleteAllItemsAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -80,11 +80,11 @@ class ItemRepository {
     /**
      * Delete a single item from the database.
      */
-    private class deleteItemAsyncTask extends AsyncTask<Item, Void, Void> {
+    private static class deleteItemAsyncTask extends AsyncTask<Item, Void, Void> {
 
         private ItemDao mAsyncTaskDao;
 
-        public deleteItemAsyncTask(ItemDao dao) {
+        deleteItemAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -98,11 +98,11 @@ class ItemRepository {
     /**
      * Update a single item from the database.
      */
-    private class updateItemAsyncTask extends AsyncTask<Item, Void, Void> {
+    private static class updateItemAsyncTask extends AsyncTask<Item, Void, Void> {
 
         private ItemDao mAsyncTaskDao;
 
-        public updateItemAsyncTask(ItemDao dao) {
+        updateItemAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;
         }
 

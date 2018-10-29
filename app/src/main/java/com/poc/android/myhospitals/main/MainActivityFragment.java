@@ -6,9 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,8 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.poc.android.myhospitals.Util.ResourceUtil;
 import com.poc.android.myhospitals.R;
+import com.poc.android.myhospitals.Util.ResourceUtil;
 import com.poc.android.myhospitals.data.Item;
 import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 
@@ -33,13 +33,13 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
     private ItemViewModel mItemViewModel;
     private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
-    Bundle mBundle;
+    private Bundle mBundle;
 
     // Bundle Key
-    public static final String ITEM_ID = "0";
+    private static final String ITEM_ID = "0";
     private static final String ITEM_NAME = "1";
-    public static final String ITEM_URL = "2";
-    public static final String ITEM_INFO = "3";
+    private static final String ITEM_URL = "2";
+    private static final String ITEM_INFO = "3";
 
     public MainActivityFragment() {
     }

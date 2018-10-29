@@ -16,7 +16,6 @@ import java.util.List;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
 
-    private final Context mContext;
     final private ListItemClickListener mClickListener;
     private final LayoutInflater mInflater;
     private List<Item> mItems;
@@ -65,7 +64,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     }
 
     public ItemListAdapter(Context context, ListItemClickListener clickListener) {
-        mContext = context;
+        Context mContext = context;
         mInflater = LayoutInflater.from(context);
         mClickListener = clickListener;
     }
