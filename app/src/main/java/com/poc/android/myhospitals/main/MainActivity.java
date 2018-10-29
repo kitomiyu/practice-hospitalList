@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
             viewModel.insert(item);
         } else if (requestCode == EDIT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Item item = new Item(data.getIntExtra(NewItemActivity.EXTRA_REPLY_ID, 0), data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
+            viewModel.updateItem(item);
             Toast.makeText(this, R.string.item_edited, Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, R.string.empty_not_saved, Toast.LENGTH_LONG).show();

@@ -37,6 +37,10 @@ class ItemRepository {
         new deleteItemAsyncTask(mItemDao).execute(item);
     }
 
+    public void updateItem(Item item) {
+        new updateItemAsyncTask(mItemDao).execute(item);
+    }
+
     /**
      * Insert a word into the database.
      */
@@ -90,4 +94,23 @@ class ItemRepository {
             return null;
         }
     }
+
+    /**
+     * Update a single item from the database.
+     */
+    private class updateItemAsyncTask extends AsyncTask<Item, Void, Void> {
+
+        private ItemDao mAsyncTaskDao;
+
+        public updateItemAsyncTask(ItemDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Item... items) {
+            mAsyncTaskDao.update(items[0]);
+            return null;
+        }
+    }
+
 }
