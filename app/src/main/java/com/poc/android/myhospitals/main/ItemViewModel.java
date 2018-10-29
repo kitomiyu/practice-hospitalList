@@ -12,9 +12,9 @@ import java.util.List;
  * This Model provides the interface between the UI and the data layer of the app,
  * represented by the repository
  */
-public class ItemViewModel extends AndroidViewModel{
+public class ItemViewModel extends AndroidViewModel {
 
-    private ItemRepository mRepository;
+    private final ItemRepository mRepository;
 
     private LiveData<List<Item>> mALlItems;
 
@@ -24,14 +24,24 @@ public class ItemViewModel extends AndroidViewModel{
         mALlItems = mRepository.getAllItems();
     }
 
-    LiveData<List<Item>> getAllItems() { return mALlItems; }
+    LiveData<List<Item>> getAllItems() {
+        return mALlItems;
+    }
 
-    public void insert(Item item) { mRepository.insert(item); }
+    public void insert(Item item) {
+        mRepository.insert(item);
+    }
 
-    public void deleteAll() { mRepository.deleteAll(); }
+    public void deleteAll() {
+        mRepository.deleteAll();
+    }
 
-    public void deleteItem(Item item) { mRepository.deleteItem(item); }
+    public void deleteItem(Item item) {
+        mRepository.deleteItem(item);
+    }
 
-    public void updateItem(Item item) { mRepository.updateItem(item); }
+    public void updateItem(Item item) {
+        mRepository.updateItem(item);
+    }
 
 }

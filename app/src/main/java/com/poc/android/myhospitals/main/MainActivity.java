@@ -7,15 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
-
-import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
+import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 
 import timber.log.Timber;
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static ItemViewModel viewModel;
     private static final int NEW_ACTIVITY_REQUEST_CODE = 1;
-    public static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
+    private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, NewItemActivity.class);
-                startActivityForResult(intent,NEW_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intent, NEW_ACTIVITY_REQUEST_CODE);
             }
         });
     }

@@ -18,7 +18,7 @@ public class NewItemActivity extends AppCompatActivity {
     public static final String EXTRA_REPLY_ID = "com.poc.android.myhospitals.REPLY.ID";
 
     // Bundle Key
-    public static final String ITEM_ID = "0";
+    private static final String ITEM_ID = "0";
     private static final String ITEM_NAME = "1";
     public static final String ITEM_URL = "2";
     public static final String ITEM_INFO = "3";
