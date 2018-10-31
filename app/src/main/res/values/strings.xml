@@ -13,6 +13,8 @@
     //Used in layout files
     <string name="item_title">Title</string>
     <string name="item_url">Url</string>
+    <string name="item_account">(Optional) Account</string>
+    <string name="item_pw">(Optional) Password</string>
     <string name="button_add">ADD</string>
     <string name="tap_me">TapMe</string>
 </resources>

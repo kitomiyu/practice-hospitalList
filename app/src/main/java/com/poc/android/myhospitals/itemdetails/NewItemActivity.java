@@ -25,6 +25,9 @@ public class NewItemActivity extends AppCompatActivity {
 
     private TextInputEditText mEditItemView;
     private TextInputEditText mEditItemViewUrl;
+    private TextInputEditText mEditItemViewAccount;
+    private TextInputEditText mEditItemViewPw;
+    private Button mButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +36,9 @@ public class NewItemActivity extends AppCompatActivity {
 
         mEditItemView = findViewById(R.id.edit_item);
         mEditItemViewUrl = findViewById(R.id.edit_item_url);
-        Button button = findViewById(R.id.button_save);
+        mEditItemViewAccount = findViewById(R.id.edit_item_account);
+        mEditItemViewPw = findViewById(R.id.edit_item_pw);
+        mButton = findViewById(R.id.button_save);
 
         final Bundle bundle = getIntent().getBundleExtra(ITEM_INFO);
 
@@ -42,7 +47,7 @@ public class NewItemActivity extends AppCompatActivity {
             mEditItemViewUrl.setText(bundle.getString(ITEM_URL));
         }
 
-        button.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create a new Intent for the reply.

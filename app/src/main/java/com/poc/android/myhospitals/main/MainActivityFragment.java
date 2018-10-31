@@ -33,7 +33,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
     private ItemViewModel mItemViewModel;
     private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
-    private Bundle mBundle;
+    Bundle mBundle;
 
     // Bundle Key
     private static final String ITEM_ID = "0";
@@ -158,7 +158,6 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                             super.onChildDraw(c, recyclerView, viewHolder, mdX, dY, actionState, isCurrentlyActive);
                         }
                     }
-
                 });
         helper.attachToRecyclerView(recyclerView);
         return rootView;
