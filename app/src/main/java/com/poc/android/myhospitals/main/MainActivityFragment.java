@@ -39,7 +39,9 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
     private static final String ITEM_ID = "0";
     private static final String ITEM_NAME = "1";
     private static final String ITEM_URL = "2";
-    private static final String ITEM_INFO = "3";
+    private static final String ITEM_ACCOUNT = "3";
+    private static final String ITEM_PW = "4";
+    private static final String ITEM_INFO = "5";
 
     public MainActivityFragment() {
     }
@@ -108,6 +110,8 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                             bundle.putString(ITEM_NAME, myItem.getItem());
                             bundle.putString(ITEM_URL, myItem.getUrl());
                             bundle.putInt(ITEM_ID, myItem.getId());
+                            bundle.putString(ITEM_ACCOUNT, myItem.getAccount());
+                            bundle.putString(ITEM_PW, myItem.getPassword());
 
                             Paint p = new Paint();
                             final float width = itemView.getHeight() / 5;

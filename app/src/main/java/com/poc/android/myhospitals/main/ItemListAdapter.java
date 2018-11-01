@@ -23,6 +23,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     // Bundle Key
     private static final String ITEM_NAME = "1";
     private static final String ITEM_URL = "2";
+    private static final String ITEM_ACCOUNT = "3";
+    private static final String ITEM_PW = "4";
 
     /**
      * The interface that receives onClick messages.
@@ -89,10 +91,14 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
             String mItem = current.getItem();
             String mUrl = current.getUrl();
+            String mAccount = current.getAccount();
+            String mPassword = current.getPassword();
             Bundle bundle = new Bundle();
 
             bundle.putString(ITEM_NAME, mItem);
             bundle.putString(ITEM_URL, mUrl);
+            bundle.putString(ITEM_ACCOUNT, mAccount);
+            bundle.putString(ITEM_PW, mPassword);
 
             mClickListener.onItemClick(bundle);
         }

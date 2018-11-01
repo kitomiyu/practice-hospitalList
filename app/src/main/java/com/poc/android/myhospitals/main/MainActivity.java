@@ -90,10 +90,19 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Item item = new Item(data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
+            Item item = new Item(
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_ACCOUNT),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_PASSWORD));
             viewModel.insert(item);
         } else if (requestCode == EDIT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Item item = new Item(data.getIntExtra(NewItemActivity.EXTRA_REPLY_ID, 0), data.getStringExtra(NewItemActivity.EXTRA_REPLY), data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL));
+            Item item = new Item(
+                    data.getIntExtra(NewItemActivity.EXTRA_REPLY_ID, 0),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_URL),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_ACCOUNT),
+                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_PASSWORD));
             viewModel.updateItem(item);
             Toast.makeText(this, R.string.item_edited, Toast.LENGTH_LONG).show();
         } else {
