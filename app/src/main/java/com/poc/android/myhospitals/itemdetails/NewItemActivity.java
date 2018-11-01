@@ -15,13 +15,17 @@ public class NewItemActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.poc.android.myhospitals.REPLY";
     public static final String EXTRA_REPLY_URL = "com.poc.android.myhospitals.REPLY.URL";
+    public static final String EXTRA_REPLY_ACCOUNT = "com.poc.android.myhospitals.REPLY.ACCOUNT";
+    public static final String EXTRA_REPLY_PASSWORD = "com.poc.android.myhospitals.REPLY.PW";
     public static final String EXTRA_REPLY_ID = "com.poc.android.myhospitals.REPLY.ID";
 
     // Bundle Key
     private static final String ITEM_ID = "0";
     private static final String ITEM_NAME = "1";
     public static final String ITEM_URL = "2";
-    public static final String ITEM_INFO = "3";
+    private static final String ITEM_ACCOUNT = "3";
+    private static final String ITEM_PW = "4";
+    public static final String ITEM_INFO = "5";
 
     private TextInputEditText mEditItemView;
     private TextInputEditText mEditItemViewUrl;
@@ -45,6 +49,8 @@ public class NewItemActivity extends AppCompatActivity {
         if (bundle != null) {
             mEditItemView.setText(bundle.getString(ITEM_NAME));
             mEditItemViewUrl.setText(bundle.getString(ITEM_URL));
+            mEditItemViewAccount.setText(bundle.getString(ITEM_ACCOUNT));
+            mEditItemViewPw.setText(bundle.getString(ITEM_PW));
         }
 
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +63,17 @@ public class NewItemActivity extends AppCompatActivity {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     // Get the new item that the user entered.
-                    String item = mEditItemView.getText().toString();
-                    String itemName = mEditItemViewUrl.getText().toString();
+                    String itemName = mEditItemView.getText().toString();
+                    String itemUrl = mEditItemViewUrl.getText().toString();
+                    String itemAccount = mEditItemViewAccount.getText().toString();
+                    String itemPassword = mEditItemViewPw.getText().toString();
                     // Put the new item in the extras for the reply Intent.
-                    replyIntent.putExtra(EXTRA_REPLY, item);
-                    replyIntent.putExtra(EXTRA_REPLY_URL, itemName);
+                    replyIntent.putExtra(EXTRA_REPLY, itemName);
+                    replyIntent.putExtra(EXTRA_REPLY_URL, itemUrl);
+                    replyIntent.putExtra(EXTRA_REPLY_ACCOUNT, itemAccount);
+                    replyIntent.putExtra(EXTRA_REPLY_PASSWORD, itemPassword);
 
+                    // in case if we need to update data, we should identify the id to find the target item in the list
                     if (bundle != null) {
                         replyIntent.putExtra(EXTRA_REPLY_ID, bundle.getInt(ITEM_ID));
                     }
