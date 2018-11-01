@@ -1,6 +1,9 @@
 package com.poc.android.myhospitals.main;
 
 import android.arch.lifecycle.Observer;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.Util.ResourceUtil;
@@ -170,10 +174,24 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
     @Override
     public void onItemClick(Bundle bundle) {
         mBundle = bundle;
+
+        onCopy(bundle);
+
         Uri webPage = Uri.parse(bundle.getString(ITEM_URL));
         Intent intent = new Intent(Intent.ACTION_VIEW, webPage);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    private void onCopy(Bundle bundle) {
+        ClipboardManager clipboard;
+        ClipData myClip;
+
+        String mAccount = bundle.getString(ITEM_ACCOUNT);
+
+        clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        myClip = ClipData.newPlainText(ITEM_ACCOUNT, mAccount);
+        clipboard.setPrimaryClip(myClip);
     }
 }
