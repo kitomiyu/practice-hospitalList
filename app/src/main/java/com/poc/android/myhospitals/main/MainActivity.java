@@ -3,8 +3,13 @@ package com.poc.android.myhospitals.main;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static ItemViewModel viewModel;
     private static final int NEW_ACTIVITY_REQUEST_CODE = 1;
     private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         Timber.plant(new Timber.DebugTree());
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupNavigation();
 
         setupViewFragment();
 
@@ -46,6 +52,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setupNavigation() {
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        //set item as selected to persist highlight
+                        item.setChecked(true);
+                        //close drawer when item is tapped
+                        mDrawerLayout.closeDrawers();
+
+                        Timber.v("item is tapped: " + item.toString());
+
+                        return true;
+                    }
+                }
+        );
+    }
+
+    // add toolbar as action bar
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze);
+    }
+
+    // handle navigation click events
     private void setupViewFragment() {
         MainActivityFragment mainActivityFragment = new MainActivityFragment();
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
@@ -75,13 +112,16 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.clear_data) {
-            // Add a toast just for confirmation
-            Toast.makeText(this, R.string.clear_data_toast_text, Toast.LENGTH_LONG).show();
-            // Delete existing data
-            viewModel.deleteAll();
-            return true;
+        switch (id) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.clear_data:
+                // Add a toast just for confirmation
+                Toast.makeText(this, R.string.clear_data_toast_text, Toast.LENGTH_LONG).show();
+                // Delete existing data
+                viewModel.deleteAll();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
