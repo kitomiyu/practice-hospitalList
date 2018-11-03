@@ -1,4 +1,4 @@
-package com.poc.android.myhospitals.Util;
+package com.poc.android.myhospitals.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;

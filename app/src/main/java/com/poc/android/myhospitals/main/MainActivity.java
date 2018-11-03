@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.data.Item;
 import com.poc.android.myhospitals.itemdetails.NewItemActivity;
+import com.poc.android.myhospitals.todolist.TasksActivity;
 
 import timber.log.Timber;
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Timber.plant(new Timber.DebugTree());
 
         setupToolbar();
+
         setupNavigation();
 
         setupViewFragment();
@@ -68,15 +70,19 @@ public class MainActivity extends AppCompatActivity {
                         int id = item.getItemId();
                         switch (id) {
                             case R.id.nav_list:
-                                setupViewFragment();
-                                return true;
+                                // Do nothing, we're already on that screen
+                                break;
                             case R.id.nav_medicine:
                                 //TODO
                                 Timber.v("----- under construction1 ------");
                                 return true;
-                            case R.id.nav_config:
-                                //TODO
-                                Timber.v("----- under construction2 ------");
+                            case R.id.nav_todo:
+                                Intent intent =
+                                        new Intent(MainActivity.this, TasksActivity.class);
+                                startActivity(intent);
+                                break;
+                            default:
+                                break;
                         }
                         return true;
                     }
