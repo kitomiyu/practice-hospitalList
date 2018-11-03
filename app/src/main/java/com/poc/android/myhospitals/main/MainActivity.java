@@ -56,38 +56,40 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupNavigation() {
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        //set item as selected to persist highlight
-                        item.setChecked(true);
-                        //close drawer when item is tapped
-                        mDrawerLayout.closeDrawers();
 
-                        int id = item.getItemId();
-                        switch (id) {
-                            case R.id.nav_list:
-                                // Do nothing, we're already on that screen
-                                break;
-                            case R.id.nav_medicine:
-                                //TODO
-                                Timber.v("----- under construction1 ------");
-                                return true;
-                            case R.id.nav_todo:
-                                Intent intent =
-                                        new Intent(MainActivity.this, TasksActivity.class);
-                                startActivity(intent);
-                                break;
-                            default:
-                                break;
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(
+                    new NavigationView.OnNavigationItemSelectedListener() {
+                        @Override
+                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                            //set item as selected to persist highlight
+                            item.setChecked(true);
+                            //close drawer when item is tapped
+                            mDrawerLayout.closeDrawers();
+
+                            int id = item.getItemId();
+                            switch (id) {
+                                case R.id.nav_list:
+                                    // Do nothing, we're already on that screen
+                                    break;
+                                case R.id.nav_medicine:
+                                    //TODO
+                                    Timber.v("----- under construction1 ------");
+                                    return true;
+                                case R.id.nav_todo:
+                                    Intent intent =
+                                            new Intent(MainActivity.this, TasksActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                default:
+                                    break;
+                            }
+                            return true;
                         }
-                        return true;
                     }
-                }
-        );
+            );
+        }
     }
 
     // add toolbar as action bar

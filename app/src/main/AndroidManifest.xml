@@ -23,7 +23,7 @@
         <activity
             android:name=".todolist.TasksActivity"
             android:label="@string/title_activity_tasks"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
