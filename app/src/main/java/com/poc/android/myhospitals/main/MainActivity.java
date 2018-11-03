@@ -65,8 +65,19 @@ public class MainActivity extends AppCompatActivity {
                         //close drawer when item is tapped
                         mDrawerLayout.closeDrawers();
 
-                        Timber.v("item is tapped: " + item.toString());
-
+                        int id = item.getItemId();
+                        switch (id) {
+                            case R.id.nav_list:
+                                setupViewFragment();
+                                return true;
+                            case R.id.nav_medicine:
+                                //TODO
+                                Timber.v("----- under construction1 ------");
+                                return true;
+                            case R.id.nav_config:
+                                //TODO
+                                Timber.v("----- under construction2 ------");
+                        }
                         return true;
                     }
                 }
