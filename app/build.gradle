@@ -28,7 +28,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+
+    // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.5'
+    implementation 'com.google.firebase:firebase-database:16.0.4'
 
     // Room components
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
