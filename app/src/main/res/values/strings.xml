@@ -5,7 +5,7 @@
     <string name="clear_all_data">Clear all data</string>
     <string name="clear_data_toast_text">Clear the data now!</string>
 
-    //Used in Activity
+    //Used in MainActivity
     <string name="empty_not_saved">Item not saved because it is empty.</string>
     <string name="item_edited">Item is edited successfully.</string>
     <string name="no_item">No item</string>
@@ -23,6 +23,8 @@
     <string name="nav_item1">Lists</string>
     <string name="nav_item2">MedicalDiary</string>
     <string name="nav_item3">SharedToDoList</string>
+
+    //Used in TaskActivity
     <string name="title_activity_tasks">TasksActivity</string>
     <string name="action_settings">Settings</string>
 </resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "783095334977",
+    "firebase_url": "https://practice-hospitallist.firebaseio.com",
+    "project_id": "practice-hospitallist",
+    "storage_bucket": "practice-hospitallist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783095334977:android:6a5536fc1fa65802",
+        "android_client_info": {
+          "package_name": "com.poc.android.myhospitals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783095334977-eu0uq1aa23o663vkrpp586mbeh8ofu2p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.poc.android.myhospitals",
+            "certificate_hash": "79b7f5f01a8f540ad89d84d8af922e2110a3c5b8"
+          }
+        },
+        {
+          "client_id": "783095334977-ct8d5epigi9p7632441qqtr5hpeol966.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxDJmf7h3Bnj1mgCwjXgFJVXt3LNVF2fU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783095334977-ct8d5epigi9p7632441qqtr5hpeol966.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

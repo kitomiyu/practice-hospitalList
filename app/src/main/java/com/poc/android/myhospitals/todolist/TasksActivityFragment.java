@@ -21,6 +21,5 @@ public class TasksActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_tasks, container, false);
 
-
     }
 }
