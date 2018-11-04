@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.poc.android.myhospitals.R;
+import com.poc.android.myhospitals.main.MainActivityFragment;
+
 import timber.log.Timber;
 
 public class TasksActivity extends AppCompatActivity {
@@ -32,6 +34,16 @@ public class TasksActivity extends AppCompatActivity {
 
         setupNavigation();
 
+        setupViewFragment();
+    }
+
+    private void setupViewFragment() {
+        TasksActivityFragment tasksActivityFragment = new TasksActivityFragment();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, tasksActivityFragment)
+                .commit();
     }
 
     // add toolbar as action bar
