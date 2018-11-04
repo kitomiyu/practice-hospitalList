@@ -9,7 +9,7 @@
     tools:context=".todolist.TasksActivity">
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
-    <include layout="@layout/app_bar_main" />
+    <include layout="@layout/app_bar_tasks" />
 
     <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
     <android.support.design.widget.NavigationView

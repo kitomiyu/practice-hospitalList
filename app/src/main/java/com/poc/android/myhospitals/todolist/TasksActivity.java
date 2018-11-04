@@ -32,13 +32,6 @@ public class TasksActivity extends AppCompatActivity {
 
         setupNavigation();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Timber.v("Tapped fab");
-            }
-        });
     }
 
     // add toolbar as action bar
