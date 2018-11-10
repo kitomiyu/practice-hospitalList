@@ -15,13 +15,20 @@ import com.poc.android.myhospitals.R;
  */
 public class TasksActivityFragment extends Fragment {
 
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mItemDatabaseReference;
+
     public TasksActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tasks, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
 
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mItemDatabaseReference = mFirebaseDatabase.getReference().child("items");
+
+        return rootView;
     }
 }
