@@ -1,5 +1,6 @@
 package com.poc.android.myhospitals.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.poc.android.myhospitals.R;
+import com.poc.android.myhospitals.itemdetails.NewItemActivity;
+import com.poc.android.myhospitals.main.MainActivity;
 import com.poc.android.myhospitals.main.MainActivityFragment;
 
 import timber.log.Timber;
@@ -22,6 +25,7 @@ import timber.log.Timber;
 public class TasksActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+    private static final int NEW_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,15 @@ public class TasksActivity extends AppCompatActivity {
         setupNavigation();
 
         setupViewFragment();
+
+        FloatingActionButton fab = findViewById(R.id.fab2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TasksActivity.this, NewItemActivity.class);
+                startActivityForResult(intent, NEW_ACTIVITY_REQUEST_CODE);
+            }
+        });
     }
 
     private void setupViewFragment() {
