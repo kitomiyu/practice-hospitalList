@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.poc.android.myhospitals.R;
 
+import java.util.List;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -17,6 +19,7 @@ public class TasksActivityFragment extends Fragment {
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mItemDatabaseReference;
+    private List<TodoItem> todoItems;
 
     public TasksActivityFragment() {
     }
