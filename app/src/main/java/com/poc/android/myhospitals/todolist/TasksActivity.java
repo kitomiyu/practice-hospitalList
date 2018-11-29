@@ -13,12 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.itemdetails.NewItemActivity;
-import com.poc.android.myhospitals.main.MainActivity;
-import com.poc.android.myhospitals.main.MainActivityFragment;
 
 import timber.log.Timber;
 

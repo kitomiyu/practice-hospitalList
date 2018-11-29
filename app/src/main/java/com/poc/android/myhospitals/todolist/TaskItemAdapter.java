@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.poc.android.myhospitals.R;
@@ -34,7 +33,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     // replace the contents of a view
     @Override
     public void onBindViewHolder(@NonNull TaskItemViewHolder holder, int position) {
-        if (mItems!= null) {
+        if (mItems != null) {
             TodoItem current = mItems.get(position);
             holder.itemName.setText(current.getText());
         }
