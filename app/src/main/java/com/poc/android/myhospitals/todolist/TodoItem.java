@@ -5,9 +5,6 @@ public class TodoItem {
     private String text;
     private String name;
 
-    public TodoItem() {
-    }
-
     public TodoItem(String text, String name) {
         this.text = text;
         this.name = name;
