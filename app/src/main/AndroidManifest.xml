@@ -28,6 +28,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".main.MainActivity" />
         </activity>
+        <activity android:name=".tododetails.TodoItemActivity" />
     </application>
 
 </manifest>

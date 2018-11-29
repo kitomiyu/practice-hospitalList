@@ -10,6 +10,10 @@
     <string name="item_edited">Item is edited successfully.</string>
     <string name="no_item">No item</string>
 
+    //Used in TodoDetailActivity
+    <string name="item_message">Please input your TODO item here</string>
+    <string name="button_send">Send</string>
+
     //Used in layout files
     <string name="item_title">Title</string>
     <string name="item_url">Url</string>

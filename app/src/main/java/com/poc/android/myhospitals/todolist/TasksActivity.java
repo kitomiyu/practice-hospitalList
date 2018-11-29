@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.itemdetails.NewItemActivity;
+import com.poc.android.myhospitals.tododetails.TodoItemActivity;
 
 import timber.log.Timber;
 
@@ -41,7 +42,7 @@ public class TasksActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TasksActivity.this, NewItemActivity.class);
+                Intent intent = new Intent(TasksActivity.this, TodoItemActivity.class);
                 startActivityForResult(intent, NEW_ACTIVITY_REQUEST_CODE);
             }
         });
