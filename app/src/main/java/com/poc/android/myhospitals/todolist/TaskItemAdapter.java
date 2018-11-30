@@ -18,8 +18,9 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     private List<TodoItem> mItems;
     private LayoutInflater mInflater;
 
-    public TaskItemAdapter(Context context) {
+    public TaskItemAdapter(Context context, List<TodoItem> item) {
         mInflater = LayoutInflater.from(context);
+        mItems = item;
     }
 
     @NonNull
@@ -56,7 +57,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
         else return 0;
     }
 
-    public void setTodoItems(List<TodoItem> items) {
+    void setTodoItems(List<TodoItem> items) {
         mItems = items;
         notifyDataSetChanged();
     }
