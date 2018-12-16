@@ -16,6 +16,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.poc.android.myhospitals.R;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import timber.log.Timber;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TasksActivityFragment extends Fragment {
+public class TasksActivityFragment extends Fragment implements TaskItemAdapter.ListItemClickListener {
 
     // Firebase instance variables
     private FirebaseDatabase mFirebaseDatabase;
@@ -37,7 +39,7 @@ public class TasksActivityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
 
@@ -50,7 +52,7 @@ public class TasksActivityFragment extends Fragment {
 
         // setup the RecyclerView
         RecyclerView recyclerView = rootView.findViewById(R.id.tasksRecyclerView);
-        final TaskItemAdapter adapter = new TaskItemAdapter(getContext(), todoItems);
+        final TaskItemAdapter adapter = new TaskItemAdapter(getContext(), todoItems, this);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -70,7 +72,9 @@ public class TasksActivityFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                TodoItem todoItem = dataSnapshot.getValue(TodoItem.class);
+                todoItems.remove(todoItem);
+                adapter.setTodoItems(todoItems);
             }
 
             @Override
@@ -86,5 +90,23 @@ public class TasksActivityFragment extends Fragment {
         mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
 
         return rootView;
+    }
+
+    @Override
+    public void onItemClick(TodoItem current) {
+        Query itemQuery = mMessagesDatabaseReference.orderByChild("text").equalTo(current.getText());
+        itemQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot itemSnapshot: dataSnapshot.getChildren()) {
+                    itemSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Timber.v("onCancelled" + databaseError.toException());
+            }
+        });
     }
 }

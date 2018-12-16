@@ -6,21 +6,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.poc.android.myhospitals.R;
 
 import java.util.List;
 
+import timber.log.Timber;
 
 public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskItemViewHolder> {
 
     private List<TodoItem> mItems;
     private LayoutInflater mInflater;
+    final private TaskItemAdapter.ListItemClickListener mClickListener;
 
-    public TaskItemAdapter(Context context, List<TodoItem> item) {
+    /**
+     * The interface that receives onClick messages.
+     */
+    public interface ListItemClickListener {
+        void onItemClick(TodoItem current);
+    }
+
+    public TaskItemAdapter(Context context, List<TodoItem> item, ListItemClickListener clickListener) {
         mInflater = LayoutInflater.from(context);
         mItems = item;
+        mClickListener = clickListener;
     }
 
     @NonNull
@@ -41,12 +52,25 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     }
 
     // provide a reference to the views for each data
-    class TaskItemViewHolder extends RecyclerView.ViewHolder {
+    class TaskItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView itemName;
+        private final CheckBox itemCheckBox;
 
         public TaskItemViewHolder(View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.taskName);
+            itemCheckBox = itemView.findViewById(R.id.taskCheck);
+
+            itemCheckBox.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // when item is checked, delete it
+            int adapterPosition = getAdapterPosition();
+            TodoItem current = mItems.get(adapterPosition);
+
+            mClickListener.onItemClick(current);
         }
     }
 

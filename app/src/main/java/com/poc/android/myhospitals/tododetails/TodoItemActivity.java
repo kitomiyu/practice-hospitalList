@@ -15,8 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.todolist.TodoItem;
 
-import timber.log.Timber;
-
 public class TodoItemActivity extends AppCompatActivity {
 
     public static final String ANONYMOUS = "anonymous";
