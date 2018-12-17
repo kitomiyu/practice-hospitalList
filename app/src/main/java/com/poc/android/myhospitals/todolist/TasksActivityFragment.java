@@ -49,6 +49,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
         //Initialize item ListView
         final List<TodoItem> todoItems = new ArrayList<>();
+        final List<String> todoItemsKey = new ArrayList<>();
 
         // setup the RecyclerView
         RecyclerView recyclerView = rootView.findViewById(R.id.tasksRecyclerView);
@@ -62,6 +63,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 TodoItem todoItem = dataSnapshot.getValue(TodoItem.class);
                 todoItems.add(todoItem);
+                todoItemsKey.add(dataSnapshot.getKey());
                 adapter.setTodoItems(todoItems);
             }
 
@@ -72,8 +74,9 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                TodoItem todoItem = dataSnapshot.getValue(TodoItem.class);
-                todoItems.remove(todoItem);
+                int index = todoItemsKey.indexOf(dataSnapshot.getKey());
+                todoItems.remove(index);
+                todoItemsKey.remove(index);
                 adapter.setTodoItems(todoItems);
             }
 
