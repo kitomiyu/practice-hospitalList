@@ -23,7 +23,7 @@
     <string name="tap_me">TapMe</string>
 
     //Used in NavigationDraw
-    <string name="nav_header">TODA childcare</string>
+    <string name="nav_header">TODO childcare</string>
     <string name="nav_item1">Lists</string>
     <string name="nav_item2">MedicalDiary</string>
     <string name="nav_item3">SharedToDoList</string>

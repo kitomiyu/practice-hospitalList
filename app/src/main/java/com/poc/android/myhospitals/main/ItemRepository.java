@@ -13,7 +13,7 @@ import java.util.List;
 class ItemRepository {
 
     private final ItemDao mItemDao;
-    private LiveData<List<Item>> mAllItems;
+    private final LiveData<List<Item>> mAllItems;
 
     ItemRepository(Application application) {
         ItemRoomDatabase db = ItemRoomDatabase.getDatabase(application);

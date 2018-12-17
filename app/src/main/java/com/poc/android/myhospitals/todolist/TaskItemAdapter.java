@@ -13,12 +13,10 @@ import com.poc.android.myhospitals.R;
 
 import java.util.List;
 
-import timber.log.Timber;
-
 public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskItemViewHolder> {
 
     private List<TodoItem> mItems;
-    private LayoutInflater mInflater;
+    private final LayoutInflater mInflater;
     final private TaskItemAdapter.ListItemClickListener mClickListener;
 
     /**
@@ -56,7 +54,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
         private final TextView itemName;
         private final CheckBox itemCheckBox;
 
-        public TaskItemViewHolder(View itemView) {
+        TaskItemViewHolder(View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.taskName);
             itemCheckBox = itemView.findViewById(R.id.taskCheck);

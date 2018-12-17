@@ -16,7 +16,7 @@ public class ItemViewModel extends AndroidViewModel {
 
     private final ItemRepository mRepository;
 
-    private LiveData<List<Item>> mALlItems;
+    private final LiveData<List<Item>> mALlItems;
 
     public ItemViewModel(Application application) {
         super(application);

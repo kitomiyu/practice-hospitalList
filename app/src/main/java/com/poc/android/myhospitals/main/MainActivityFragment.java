@@ -37,7 +37,6 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
     private ItemViewModel mItemViewModel;
     private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
-    Bundle mBundle;
 
     // Bundle Key
     private static final String ITEM_ID = "0";
@@ -173,7 +172,6 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
     @Override
     public void onItemClick(Bundle bundle) {
-        mBundle = bundle;
 
         onCopy(bundle);
 
@@ -192,6 +190,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
         clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
         myClip = ClipData.newPlainText(ITEM_ACCOUNT, mAccount);
+        assert clipboard != null;
         clipboard.setPrimaryClip(myClip);
     }
 }

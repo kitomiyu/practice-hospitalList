@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.poc.android.myhospitals.R;
-import com.poc.android.myhospitals.itemdetails.NewItemActivity;
 import com.poc.android.myhospitals.tododetails.TodoItemActivity;
 
 import timber.log.Timber;

@@ -30,8 +30,6 @@ import timber.log.Timber;
  */
 public class TasksActivityFragment extends Fragment implements TaskItemAdapter.ListItemClickListener {
 
-    // Firebase instance variables
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
 
@@ -44,7 +42,8 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
         View rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
 
         // Initialize Firebase components
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        // Firebase instance variables
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
 
         //Initialize item ListView

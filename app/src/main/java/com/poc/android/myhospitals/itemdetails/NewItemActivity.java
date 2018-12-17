@@ -22,7 +22,7 @@ public class NewItemActivity extends AppCompatActivity {
     // Bundle Key
     private static final String ITEM_ID = "0";
     private static final String ITEM_NAME = "1";
-    public static final String ITEM_URL = "2";
+    private static final String ITEM_URL = "2";
     private static final String ITEM_ACCOUNT = "3";
     private static final String ITEM_PW = "4";
     public static final String ITEM_INFO = "5";
@@ -31,7 +31,6 @@ public class NewItemActivity extends AppCompatActivity {
     private TextInputEditText mEditItemViewUrl;
     private TextInputEditText mEditItemViewAccount;
     private TextInputEditText mEditItemViewPw;
-    private Button mButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class NewItemActivity extends AppCompatActivity {
         mEditItemViewUrl = findViewById(R.id.edit_item_url);
         mEditItemViewAccount = findViewById(R.id.edit_item_account);
         mEditItemViewPw = findViewById(R.id.edit_item_pw);
-        mButton = findViewById(R.id.button_save);
+        Button mButton = findViewById(R.id.button_save);
 
         final Bundle bundle = getIntent().getBundleExtra(ITEM_INFO);
 
