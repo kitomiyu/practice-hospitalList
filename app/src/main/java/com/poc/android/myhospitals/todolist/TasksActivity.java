@@ -62,7 +62,7 @@ public class TasksActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_dehaze);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
     }
 
     private void setupNavigation() {
