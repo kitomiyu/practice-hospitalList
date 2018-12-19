@@ -32,6 +32,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
+    TodoItem mCurrentData;
 
     public TasksActivityFragment() {
     }
@@ -96,19 +97,26 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
     @Override
     public void onItemClick(TodoItem current) {
-        Query itemQuery = mMessagesDatabaseReference.orderByChild("text").equalTo(current.getText());
-        itemQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot itemSnapshot: dataSnapshot.getChildren()) {
-                    itemSnapshot.getRef().removeValue();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Timber.v("onCancelled" + databaseError.toException());
-            }
-        });
+        mCurrentData = current;
+        // When item is selected, gray out the background color or offline the wording
     }
+
+    public void clearSelectedData() {
+        if (mCurrentData != null) {
+            Query itemQuery = mMessagesDatabaseReference.orderByChild("text").equalTo(mCurrentData.getText());
+            itemQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot itemSnapshot : dataSnapshot.getChildren()) {
+                        itemSnapshot.getRef().removeValue();
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Timber.v("onCancelled" + databaseError.toException());
+                }
+            });
+        }
+    }
+
 }

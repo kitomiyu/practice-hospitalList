@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -23,6 +24,7 @@ public class TasksActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private static final int NEW_ACTIVITY_REQUEST_CODE = 1;
+    TasksActivityFragment tasksActivityFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,7 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     private void setupViewFragment() {
-        TasksActivityFragment tasksActivityFragment = new TasksActivityFragment();
+        tasksActivityFragment = new TasksActivityFragment();
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
@@ -103,6 +105,13 @@ public class TasksActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_tasks, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -110,6 +119,9 @@ public class TasksActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
+            case R.id.clear_item:
+                tasksActivityFragment.clearSelectedData();
+                return true;
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
