@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.poc.android.myhospitals.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskItemViewHolder> {
@@ -18,12 +19,13 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     private List<TodoItem> mItems;
     private final LayoutInflater mInflater;
     final private TaskItemAdapter.ListItemClickListener mClickListener;
+    List<TodoItem> mDeleteItems = new ArrayList<>();
 
     /**
      * The interface that receives onClick messages.
      */
     public interface ListItemClickListener {
-        void onItemClick(TodoItem current);
+        void onItemClick(List<TodoItem> targetItems);
     }
 
     public TaskItemAdapter(Context context, List<TodoItem> item, ListItemClickListener clickListener) {
@@ -50,7 +52,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     }
 
     // provide a reference to the views for each data
-    class TaskItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class TaskItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView itemName;
         private final CheckBox itemCheckBox;
 
@@ -67,8 +69,9 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
             // when item is checked, delete it
             int adapterPosition = getAdapterPosition();
             TodoItem current = mItems.get(adapterPosition);
+            mDeleteItems.add(current);
 
-            mClickListener.onItemClick(current);
+            mClickListener.onItemClick(mDeleteItems);
         }
     }
 
