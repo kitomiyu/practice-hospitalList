@@ -12,10 +12,7 @@ import android.widget.TextView;
 import com.poc.android.myhospitals.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import timber.log.Timber;
 
 public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskItemViewHolder> {
 
@@ -73,7 +70,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
             int adapterPosition = getAdapterPosition();
             TodoItem current = mItems.get(adapterPosition);
 
-            if (itemCheckBox.isChecked()){
+            if (itemCheckBox.isChecked()) {
                 // when item is checked, add the item as delete target
                 mDeleteItems.add(current);
                 mClickListener.onItemClick(mDeleteItems);

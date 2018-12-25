@@ -96,7 +96,9 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     }
 
     @Override
-    public void onItemClick(List<TodoItem> targetItems) { mTargetItems = targetItems; }
+    public void onItemClick(List<TodoItem> targetItems) {
+        mTargetItems = targetItems;
+    }
 
     public void clearSelectedData() {
         if (mTargetItems != null) {
