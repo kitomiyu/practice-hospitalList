@@ -1,8 +1,11 @@
 package com.poc.android.myhospitals.todolist;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     private final LayoutInflater mInflater;
     final private TaskItemAdapter.ListItemClickListener mClickListener;
     List<TodoItem> mDeleteItems = new ArrayList<>();
+    Context mContext;
 
     /**
      * The interface that receives onClick messages.
@@ -29,7 +33,8 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     }
 
     public TaskItemAdapter(Context context, List<TodoItem> item, ListItemClickListener clickListener) {
-        mInflater = LayoutInflater.from(context);
+        mContext = context;
+        mInflater = LayoutInflater.from(mContext);
         mItems = item;
         mClickListener = clickListener;
     }
@@ -69,13 +74,23 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             TodoItem current = mItems.get(adapterPosition);
+            TextPaint paint = itemName.getPaint();
 
             if (itemCheckBox.isChecked()) {
+                // change color
+                itemName.setTextColor(Color.LTGRAY);
+                // add strikethrough
+                paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                paint.setAntiAlias(true);
+
                 // when item is checked, add the item as delete target
                 mDeleteItems.add(current);
                 mClickListener.onItemClick(mDeleteItems);
             } else {
                 mDeleteItems.remove(current);
+                itemName.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+                paint.setFlags(itemName.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+                paint.setAntiAlias(false);
             }
         }
     }
