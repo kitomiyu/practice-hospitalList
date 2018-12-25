@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.poc.android.myhospitals.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskItemViewHolder> {
 
@@ -48,6 +51,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
         if (mItems != null) {
             TodoItem current = mItems.get(position);
             holder.itemName.setText(current.getText());
+            holder.itemCheckBox.setChecked(false);
         }
     }
 
@@ -66,12 +70,16 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
 
         @Override
         public void onClick(View v) {
-            // when item is checked, delete it
             int adapterPosition = getAdapterPosition();
             TodoItem current = mItems.get(adapterPosition);
-            mDeleteItems.add(current);
 
-            mClickListener.onItemClick(mDeleteItems);
+            if (itemCheckBox.isChecked()){
+                // when item is checked, add the item as delete target
+                mDeleteItems.add(current);
+                mClickListener.onItemClick(mDeleteItems);
+            } else {
+                mDeleteItems.remove(current);
+            }
         }
     }
 

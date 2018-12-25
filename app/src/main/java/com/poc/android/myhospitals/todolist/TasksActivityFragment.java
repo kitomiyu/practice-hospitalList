@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +33,6 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
     List<TodoItem> mTargetItems;
-    CheckBox itemCheckBox;
 
     public TasksActivityFragment() {
     }
@@ -43,8 +41,6 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     public View onCreateView(@NonNull final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
-
-        itemCheckBox = rootView.findViewById(R.id.taskCheck);
 
         // Initialize Firebase components
         // Firebase instance variables
@@ -100,10 +96,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     }
 
     @Override
-    public void onItemClick(List<TodoItem> targetItems) {
-        mTargetItems = targetItems;
-        // When item is selected, gray out the background color or offline the wording
-    }
+    public void onItemClick(List<TodoItem> targetItems) { mTargetItems = targetItems; }
 
     public void clearSelectedData() {
         if (mTargetItems != null) {
