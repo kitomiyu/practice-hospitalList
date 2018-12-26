@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextPaint;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     final private TaskItemAdapter.ListItemClickListener mClickListener;
     List<TodoItem> mDeleteItems = new ArrayList<>();
     Context mContext;
+    private SparseBooleanArray itemStateArray = new SparseBooleanArray();
 
     /**
      * The interface that receives onClick messages.
@@ -52,6 +54,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     public void onBindViewHolder(@NonNull TaskItemViewHolder holder, int position) {
         if (mItems != null) {
             TodoItem current = mItems.get(position);
+
             holder.itemName.setText(current.getText());
             holder.itemCheckBox.setChecked(false);
         }
@@ -76,21 +79,26 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
             TodoItem current = mItems.get(adapterPosition);
             TextPaint paint = itemName.getPaint();
 
-            if (itemCheckBox.isChecked()) {
-                // change color
-                itemName.setTextColor(Color.LTGRAY);
-                // add strikethrough
-                paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                paint.setAntiAlias(true);
-
+            if(!itemStateArray.get(adapterPosition, false)){
                 // when item is checked, add the item as delete target
                 mDeleteItems.add(current);
+                // change color
+                itemName.setTextColor(Color.LTGRAY);
+                // add strikethru
+                paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                paint.setAntiAlias(true);
+                // add in arraylist as target item to remove
+                itemStateArray.put(adapterPosition, true);
                 mClickListener.onItemClick(mDeleteItems);
             } else {
+                // when item is unchecked, add the item as delete target
                 mDeleteItems.remove(current);
+                // back the text color
                 itemName.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+                // remove strikethru
                 paint.setFlags(itemName.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
                 paint.setAntiAlias(false);
+                itemStateArray.put(adapterPosition, false);
             }
         }
     }
