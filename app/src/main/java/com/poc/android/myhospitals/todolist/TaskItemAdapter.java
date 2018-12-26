@@ -27,6 +27,8 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     Context mContext;
     private SparseBooleanArray itemStateArray = new SparseBooleanArray();
 
+    private static final int UPDATE_KEY_REMOVE = 0;
+
     /**
      * The interface that receives onClick messages.
      */
@@ -54,9 +56,8 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     public void onBindViewHolder(@NonNull TaskItemViewHolder holder, int position) {
         if (mItems != null) {
             TodoItem current = mItems.get(position);
-
+            holder.bind(position);
             holder.itemName.setText(current.getText());
-            holder.itemCheckBox.setChecked(false);
         }
     }
 
@@ -64,40 +65,57 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     class TaskItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView itemName;
         private final CheckBox itemCheckBox;
+        private final TextPaint paint;
 
         TaskItemViewHolder(View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.taskName);
             itemCheckBox = itemView.findViewById(R.id.taskCheck);
+            paint = itemName.getPaint();
 
             itemCheckBox.setOnClickListener(this);
+        }
+
+        void bind(int position) {
+            // use the sparse boolean array to check
+            if (!itemStateArray.get(position, false)) {
+                itemCheckBox.setChecked(false);
+            }
+            else{
+                itemCheckBox.setChecked(true);
+            }
+        }
+
+        void enableStrikethrough() {
+            paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            paint.setAntiAlias(true);
+        }
+
+        void disableStrikethrough() {
+            paint.setFlags(itemName.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
+            paint.setAntiAlias(false);
         }
 
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
             TodoItem current = mItems.get(adapterPosition);
-            TextPaint paint = itemName.getPaint();
 
-            if(!itemStateArray.get(adapterPosition, false)){
+            if (!itemStateArray.get(adapterPosition, false)) {
                 // when item is checked, add the item as delete target
                 mDeleteItems.add(current);
                 // change color
                 itemName.setTextColor(Color.LTGRAY);
-                // add strikethru
-                paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                paint.setAntiAlias(true);
+                enableStrikethrough();
                 // add in arraylist as target item to remove
                 itemStateArray.put(adapterPosition, true);
                 mClickListener.onItemClick(mDeleteItems);
             } else {
                 // when item is unchecked, add the item as delete target
                 mDeleteItems.remove(current);
+                disableStrikethrough();
                 // back the text color
                 itemName.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
-                // remove strikethru
-                paint.setFlags(itemName.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
-                paint.setAntiAlias(false);
                 itemStateArray.put(adapterPosition, false);
             }
         }
@@ -110,7 +128,14 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
         else return 0;
     }
 
-    void setTodoItems(List<TodoItem> items) {
+    void resetValue() {
+        itemStateArray.clear();
+    }
+
+    void setTodoItems(List<TodoItem> items, int action) {
+        if (action == UPDATE_KEY_REMOVE) {
+            resetValue();
+        }
         mItems = items;
         notifyDataSetChanged();
     }

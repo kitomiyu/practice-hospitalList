@@ -34,6 +34,9 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     private ChildEventListener mChildEventListener;
     List<TodoItem> mTargetItems;
 
+    private static final int UPDATE_KEY_REMOVE = 0;
+    private static final int UPDATE_KEY_ADD = 1;
+
     public TasksActivityFragment() {
     }
 
@@ -64,7 +67,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                 TodoItem todoItem = dataSnapshot.getValue(TodoItem.class);
                 todoItems.add(todoItem);
                 todoItemsKey.add(dataSnapshot.getKey());
-                adapter.setTodoItems(todoItems);
+                adapter.setTodoItems(todoItems, UPDATE_KEY_ADD);
             }
 
             @Override
@@ -77,7 +80,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                 int index = todoItemsKey.indexOf(dataSnapshot.getKey());
                 todoItems.remove(index);
                 todoItemsKey.remove(index);
-                adapter.setTodoItems(todoItems);
+                adapter.setTodoItems(todoItems, UPDATE_KEY_REMOVE);
             }
 
             @Override
