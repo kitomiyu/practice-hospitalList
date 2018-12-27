@@ -88,12 +88,11 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
 
         void enableStrikethrough() {
             paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            paint.setAntiAlias(true);
+            paint.setAntiAlias(false);
         }
 
         void disableStrikethrough() {
             paint.setFlags(itemName.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
-            paint.setAntiAlias(false);
         }
 
         @Override
@@ -130,6 +129,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
 
     void resetValue() {
         itemStateArray.clear();
+        mDeleteItems.clear();
     }
 
     void setTodoItems(List<TodoItem> items, int action) {
