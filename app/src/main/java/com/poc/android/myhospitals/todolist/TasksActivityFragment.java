@@ -1,5 +1,6 @@
 package com.poc.android.myhospitals.todolist;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -81,6 +83,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                 todoItems.remove(index);
                 todoItemsKey.remove(index);
                 adapter.setTodoItems(todoItems, UPDATE_KEY_REMOVE);
+                Toast.makeText(getContext(), R.string.item_delete_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

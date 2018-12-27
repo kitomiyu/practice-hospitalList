@@ -75,6 +75,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
         }
 
         void bind(int position) {
+
             // use the sparse boolean array to check
             if (!itemStateArray.get(position, false)) {
                 itemCheckBox.setChecked(false);

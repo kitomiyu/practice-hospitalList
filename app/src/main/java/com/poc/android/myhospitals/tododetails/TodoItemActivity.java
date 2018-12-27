@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -68,10 +70,14 @@ public class TodoItemActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Send item on click
-                TodoItem todoItem = new TodoItem(mMessage.getText().toString(), mUserName);
-                mMessagesDatabaseReference.push().setValue(todoItem);
 
+                if (TextUtils.isEmpty(mMessage.getText())) {
+                    Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_SHORT).show();
+                } else {
+                    //Send item on click
+                    TodoItem todoItem = new TodoItem(mMessage.getText().toString(), mUserName);
+                    mMessagesDatabaseReference.push().setValue(todoItem);
+                }
                 finish();
             }
         });
