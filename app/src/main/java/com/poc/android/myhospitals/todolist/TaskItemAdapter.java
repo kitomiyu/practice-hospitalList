@@ -65,13 +65,11 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     class TaskItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView itemName;
         private final CheckBox itemCheckBox;
-        private final TextPaint paint;
 
         TaskItemViewHolder(View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.taskName);
             itemCheckBox = itemView.findViewById(R.id.taskCheck);
-            paint = itemName.getPaint();
 
             itemCheckBox.setOnClickListener(this);
         }
@@ -86,15 +84,6 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
             }
         }
 
-        void enableStrikethrough() {
-            paint.setFlags(itemName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            paint.setAntiAlias(false);
-        }
-
-        void disableStrikethrough() {
-            paint.setFlags(itemName.getPaintFlags() ^ Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
@@ -103,18 +92,12 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
             if (!itemStateArray.get(adapterPosition, false)) {
                 // when item is checked, add the item as delete target
                 mDeleteItems.add(current);
-                // change color
-                itemName.setTextColor(Color.LTGRAY);
-                enableStrikethrough();
                 // add in arraylist as target item to remove
                 itemStateArray.put(adapterPosition, true);
                 mClickListener.onItemClick(mDeleteItems);
             } else {
                 // when item is unchecked, add the item as delete target
                 mDeleteItems.remove(current);
-                disableStrikethrough();
-                // back the text color
-                itemName.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
                 itemStateArray.put(adapterPosition, false);
             }
         }
