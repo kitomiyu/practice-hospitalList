@@ -66,7 +66,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     }
 
     public ItemListAdapter(Context context, ListItemClickListener clickListener) {
-        Context mContext = context;
         mInflater = LayoutInflater.from(context);
         mClickListener = clickListener;
     }

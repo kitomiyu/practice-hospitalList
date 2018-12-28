@@ -25,9 +25,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.poc.android.myhospitals.R;
 
-import java.lang.annotation.AnnotationTypeMismatchException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import timber.log.Timber;
@@ -37,16 +37,24 @@ import timber.log.Timber;
  */
 public class TasksActivityFragment extends Fragment implements TaskItemAdapter.ListItemClickListener {
 
+    // Firebase instance variables
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
-    List<TodoItem> mTargetItems;
+    private List<TodoItem> mTargetItems;
+    private String mUsername;
+    private List<TodoItem> todoItems;
+    private List<String> todoItemsKey;
+    private TaskItemAdapter adapter;
+    private Boolean authFlag = false;
+    private Context mContext;
 
     private static final int UPDATE_KEY_REMOVE = 0;
     private static final int UPDATE_KEY_ADD = 1;
     public static final int RC_SIGN_IN = 1;
+    private static final String ANONYMOUS = "anonymous";
 
     public TasksActivityFragment() {
     }
@@ -56,6 +64,8 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
 
+        mContext = getContext();
+
         // Initialize Firebase components
         // Firebase instance variables
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -63,73 +73,41 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
 
-
         //Initialize item ListView
-        final List<TodoItem> todoItems = new ArrayList<>();
-        final List<String> todoItemsKey = new ArrayList<>();
+        todoItems = new ArrayList<>();
+        todoItemsKey = new ArrayList<>();
 
         // setup the RecyclerView
         RecyclerView recyclerView = rootView.findViewById(R.id.tasksRecyclerView);
-        final TaskItemAdapter adapter = new TaskItemAdapter(getContext(), todoItems, this);
+        adapter = new TaskItemAdapter(getContext(), todoItems, this);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TodoItem todoItem = dataSnapshot.getValue(TodoItem.class);
-                todoItems.add(todoItem);
-                todoItemsKey.add(dataSnapshot.getKey());
-                adapter.setTodoItems(todoItems, UPDATE_KEY_ADD);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                int index = todoItemsKey.indexOf(dataSnapshot.getKey());
-                todoItems.remove(index);
-                todoItemsKey.remove(index);
-                adapter.setTodoItems(todoItems, UPDATE_KEY_REMOVE);
-                Toast.makeText(getContext(), R.string.item_delete_success, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        };
-        mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
-                    Timber.v(String.valueOf(R.string.sign_in));
+                    if (!authFlag) {
+                        // User is signed in
+                        Toast.makeText(mContext, R.string.sign_in, Toast.LENGTH_LONG).show();
+                        onSignedInInitialize(user.getDisplayName());
+                        authFlag = true;
+                    }
                 } else {
                     // User is signed out
+                    onSignedOutCleanup();
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
-                                    .setAvailableProviders(Arrays.asList(
+                                    .setAvailableProviders(Collections.singletonList(
                                             new AuthUI.IdpConfig.GoogleBuilder().build()))
                                     .build(),
                             RC_SIGN_IN);
                 }
             }
         };
-
         return rootView;
     }
 
@@ -144,9 +122,10 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     public void onPause() {
         super.onPause();
         Timber.v("onPause is called");
-        if (mAuthStateListener != null) {
-            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
-        }
+    }
+
+    public String returnUser() {
+        return mUsername;
     }
 
     @Override
@@ -172,6 +151,61 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                     }
                 });
             }
+        }
+    }
+
+    private void onSignedInInitialize(String username) {
+        mUsername = username;
+        attachDatabaseReadListener();
+    }
+
+    private void onSignedOutCleanup() {
+        mUsername = ANONYMOUS;
+        detachDatabaseReadListener();
+    }
+
+    private void attachDatabaseReadListener() {
+        if (mChildEventListener == null) {
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    TodoItem todoItem = dataSnapshot.getValue(TodoItem.class);
+                    todoItems.add(todoItem);
+                    todoItemsKey.add(dataSnapshot.getKey());
+                    adapter.setTodoItems(todoItems, UPDATE_KEY_ADD);
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                    int index = todoItemsKey.indexOf(dataSnapshot.getKey());
+                    todoItems.remove(index);
+                    todoItemsKey.remove(index);
+                    adapter.setTodoItems(todoItems, UPDATE_KEY_REMOVE);
+                    Toast.makeText(mContext, R.string.item_delete_success, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
+        }
+    }
+
+    private void detachDatabaseReadListener() {
+        if (mChildEventListener != null) {
+            mMessagesDatabaseReference.removeEventListener(mChildEventListener);
+            mChildEventListener = null;
         }
     }
 

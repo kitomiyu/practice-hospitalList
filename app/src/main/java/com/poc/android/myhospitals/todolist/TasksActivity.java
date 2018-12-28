@@ -23,8 +23,9 @@ import timber.log.Timber;
 public class TasksActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-    private static final int NEW_ACTIVITY_REQUEST_CODE = 1;
-    TasksActivityFragment tasksActivityFragment;
+    private TasksActivityFragment tasksActivityFragment;
+    String mUser;
+    final String user_name = "USER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,10 @@ public class TasksActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mUser = tasksActivityFragment.returnUser();
                 Intent intent = new Intent(TasksActivity.this, TodoItemActivity.class);
-                startActivityForResult(intent, NEW_ACTIVITY_REQUEST_CODE);
+                intent.putExtra(user_name, mUser);
+                startActivity(intent);
             }
         });
     }

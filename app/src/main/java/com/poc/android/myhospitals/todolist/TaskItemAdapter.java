@@ -1,11 +1,9 @@
 package com.poc.android.myhospitals.todolist;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextPaint;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +21,7 @@ public class TaskItemAdapter extends RecyclerView.Adapter<TaskItemAdapter.TaskIt
     private List<TodoItem> mItems;
     private final LayoutInflater mInflater;
     final private TaskItemAdapter.ListItemClickListener mClickListener;
-    List<TodoItem> mDeleteItems = new ArrayList<>();
+    private final List<TodoItem> mDeleteItems = new ArrayList<>();
     Context mContext;
     private SparseBooleanArray itemStateArray = new SparseBooleanArray();
 

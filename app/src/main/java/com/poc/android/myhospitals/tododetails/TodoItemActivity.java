@@ -19,13 +19,12 @@ import com.poc.android.myhospitals.todolist.TodoItem;
 
 public class TodoItemActivity extends AppCompatActivity {
 
-    private static final String ANONYMOUS = "anonymous";
-    public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+    private static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+    private String mUserName;
+    final String user_name = "USER";
 
     private TextView mMessage;
     private Button mButton;
-
-    private String mUserName;
 
     private DatabaseReference mMessagesDatabaseReference;
 
@@ -34,7 +33,7 @@ public class TodoItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_item);
 
-        mUserName = ANONYMOUS;
+        mUserName = getIntent().getStringExtra(user_name);
 
         // Initialize Firebase components
         // Firebase instance variables
