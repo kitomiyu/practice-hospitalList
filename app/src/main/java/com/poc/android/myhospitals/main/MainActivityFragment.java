@@ -37,6 +37,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
     private ItemViewModel mItemViewModel;
     private static final int EDIT_ACTIVITY_REQUEST_CODE = 2;
+    private Context mContext;
 
     // Bundle Key
     private static final String ITEM_ID = "0";
@@ -53,6 +54,8 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        mContext = getContext();
 
         // setup the RecyclerView
         RecyclerView recyclerView = rootView.findViewById(R.id.mainRecyclerView);
@@ -75,7 +78,7 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
         ItemTouchHelper helper = new ItemTouchHelper(
                 new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                     @Override
-                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                    public boolean onMove(@NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                         final int fromPos = viewHolder.getAdapterPosition();
                         final int toPos = target.getAdapterPosition();
                         adapter.notifyItemMoved(fromPos, toPos);
@@ -123,14 +126,14 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
                             if (dX > 0) {
                                 mdX = dX / 5;
                                 /* Set color for positive displacement */
-                                int color = ContextCompat.getColor(getContext(), R.color.colorDarKGreen);
+                                int color = ContextCompat.getColor(mContext, R.color.colorDarKGreen);
                                 p.setColor(color);
 
                                 // Draw Rect with varying right side, equal to displacement dX
                                 c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), mdX,
                                         (float) itemView.getBottom(), p);
 
-                                bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_edit);
+                                bitmap = ResourceUtil.getBitmap(mContext, R.drawable.ic_vector_edit);
                                 final float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
 
                                 c.drawBitmap(bitmap, (float) itemView.getLeft() + width, (float) itemView.getTop() + height, p);
@@ -150,14 +153,14 @@ public class MainActivityFragment extends Fragment implements ItemListAdapter.Li
 
                             } else { // RIGHT to LEFT :: delete item
                                 /* Set color for negative displacement */
-                                int color = ContextCompat.getColor(getContext(), R.color.colorDarkRed);
+                                int color = ContextCompat.getColor(mContext, R.color.colorDarkRed);
                                 p.setColor(color);
 
                                 // Draw Rect with varying left side, equal to the item's right side plus negative displacement dX
                                 c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
                                         (float) itemView.getRight(), (float) itemView.getBottom(), p);
 
-                                bitmap = ResourceUtil.getBitmap(getContext(), R.drawable.ic_vector_delete);
+                                bitmap = ResourceUtil.getBitmap(mContext, R.drawable.ic_vector_delete);
                                 float height = (itemView.getHeight() / 2) - (bitmap.getHeight() / 2);
 
                                 c.drawBitmap(bitmap, (float) itemView.getRight() - (bitmap.getWidth() + width), (float) itemView.getTop() + height, p);

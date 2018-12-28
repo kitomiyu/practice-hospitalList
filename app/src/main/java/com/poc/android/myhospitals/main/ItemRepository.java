@@ -46,7 +46,7 @@ class ItemRepository {
      */
     private static class insertAsyncTask extends AsyncTask<Item, Void, Void> {
 
-        private ItemDao mAsyncTaskDao;
+        private final ItemDao mAsyncTaskDao;
 
         insertAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;

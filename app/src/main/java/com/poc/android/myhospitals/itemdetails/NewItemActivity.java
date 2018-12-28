@@ -25,7 +25,7 @@ public class NewItemActivity extends AppCompatActivity {
     private static final String ITEM_URL = "2";
     private static final String ITEM_ACCOUNT = "3";
     private static final String ITEM_PW = "4";
-    public static final String ITEM_INFO = "5";
+    private static final String ITEM_INFO = "5";
 
     private TextInputEditText mEditItemView;
     private TextInputEditText mEditItemViewUrl;
