@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +25,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.poc.android.myhospitals.R;
 
+import java.lang.annotation.AnnotationTypeMismatchException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import timber.log.Timber;
@@ -34,10 +39,14 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
     private DatabaseReference mMessagesDatabaseReference;
     private ChildEventListener mChildEventListener;
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
     List<TodoItem> mTargetItems;
 
     private static final int UPDATE_KEY_REMOVE = 0;
     private static final int UPDATE_KEY_ADD = 1;
+    public static final int RC_SIGN_IN = 1;
 
     public TasksActivityFragment() {
     }
@@ -50,7 +59,10 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
         // Initialize Firebase components
         // Firebase instance variables
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         mMessagesDatabaseReference = mFirebaseDatabase.getReference().child("messages");
+
 
         //Initialize item ListView
         final List<TodoItem> todoItems = new ArrayList<>();
@@ -98,7 +110,43 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
         };
         mMessagesDatabaseReference.addChildEventListener(mChildEventListener);
 
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Timber.v(String.valueOf(R.string.sign_in));
+                } else {
+                    // User is signed out
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setAvailableProviders(Arrays.asList(
+                                            new AuthUI.IdpConfig.GoogleBuilder().build()))
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            }
+        };
+
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Timber.v("onResume is called");
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Timber.v("onPause is called");
+        if (mAuthStateListener != null) {
+            mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+        }
     }
 
     @Override
