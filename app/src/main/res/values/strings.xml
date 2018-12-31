@@ -4,6 +4,9 @@
     //Used in menu
     <string name="clear_all_data">Clear all data</string>
     <string name="clear_data_toast_text">Clear the data now!</string>
+
+    //Used in menu for tasks
+    <string name="sign_out">Sign out</string>
     <string name="clear_selected_data">Clear selected data</string>
 
     //Used in MainActivity

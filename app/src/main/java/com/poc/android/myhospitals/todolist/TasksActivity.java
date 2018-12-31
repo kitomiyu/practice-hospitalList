@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.firebase.ui.auth.AuthUI;
 import com.poc.android.myhospitals.R;
 import com.poc.android.myhospitals.tododetails.TodoItemActivity;
 
@@ -122,6 +123,10 @@ public class TasksActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch (id) {
+            case R.id.sign_out:
+                //Sign out
+                AuthUI.getInstance().signOut(this);
+                return true;
             case R.id.clear_item:
                 tasksActivityFragment.clearSelectedData();
                 return true;
