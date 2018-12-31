@@ -1,6 +1,8 @@
 package com.poc.android.myhospitals.todolist;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -66,6 +68,8 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
         mContext = getContext();
 
+        Timber.v("------ onCreateView is called");
+
         // Initialize Firebase components
         // Firebase instance variables
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -91,8 +95,8 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                 if (user != null) {
                     if (!authFlag) {
                         // User is signed in
-                        Toast.makeText(mContext, R.string.sign_in, Toast.LENGTH_LONG).show();
                         onSignedInInitialize(user.getDisplayName());
+                        Toast.makeText(mContext, R.string.sign_in, Toast.LENGTH_LONG).show();
                         authFlag = true;
                     }
                 } else {
@@ -112,16 +116,29 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == Activity.RESULT_OK) {
+                Toast.makeText(mContext, R.string.sign_in_initial, Toast.LENGTH_SHORT).show();
+            } else if (requestCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(mContext, R.string.sign_in_cancel, Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+        }
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        Timber.v("onResume is called");
+        Timber.v("------ onResume is called");
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Timber.v("onPause is called");
+        Timber.v("------ onPause is called");
     }
 
     public String returnUser() {

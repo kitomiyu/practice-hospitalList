@@ -33,5 +33,7 @@
     <string name="title_activity_tasks">TasksActivity</string>
     <string name="item_delete_success">Item deleted successfully</string>
     <string name="sign_in">you are signed in</string>
+    <string name="sign_in_initial">Signed in!</string>
+    <string name="sign_in_cancel">Sign in canceled</string>
 
 </resources>
