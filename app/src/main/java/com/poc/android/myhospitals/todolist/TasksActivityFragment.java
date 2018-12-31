@@ -117,7 +117,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(mContext, R.string.sign_in_initial, Toast.LENGTH_SHORT).show();
