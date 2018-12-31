@@ -97,7 +97,6 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                         // User is signed in
                         onSignedInInitialize(user.getDisplayName());
                         Toast.makeText(mContext, R.string.sign_in, Toast.LENGTH_LONG).show();
-                        onSignedInInitialize(user.getDisplayName());
                         authFlag = true;
                     }
                 } else {
