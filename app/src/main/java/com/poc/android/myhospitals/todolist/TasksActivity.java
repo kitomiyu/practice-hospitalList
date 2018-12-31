@@ -1,5 +1,6 @@
 package com.poc.android.myhospitals.todolist;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.poc.android.myhospitals.R;
@@ -27,6 +29,7 @@ public class TasksActivity extends AppCompatActivity {
     private TasksActivityFragment tasksActivityFragment;
     String mUser;
     final String user_name = "USER";
+    public static final int RC_SIGN_IN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,4 +141,20 @@ public class TasksActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            if (resultCode == Activity.RESULT_OK) {
+                Toast.makeText(this, R.string.sign_in_initial, Toast.LENGTH_SHORT).show();
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                Toast.makeText(this, R.string.sign_in_cancel, Toast.LENGTH_SHORT).show();
+                NavUtils.navigateUpFromSameTask(TasksActivity.this);
+                finish();
+            }
+        }
+    }
+
 }

@@ -102,7 +102,7 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
                 } else {
                     // User is signed out
                     onSignedOutCleanup();
-                    startActivityForResult(
+                    getActivity().startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
                                     .setAvailableProviders(Collections.singletonList(
@@ -113,19 +113,6 @@ public class TasksActivityFragment extends Fragment implements TaskItemAdapter.L
             }
         };
         return rootView;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-            if (resultCode == Activity.RESULT_OK) {
-                Toast.makeText(mContext, R.string.sign_in_initial, Toast.LENGTH_SHORT).show();
-            } else if (requestCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(mContext, R.string.sign_in_cancel, Toast.LENGTH_SHORT).show();
-                getActivity().finish();
-            }
-        }
     }
 
     @Override
