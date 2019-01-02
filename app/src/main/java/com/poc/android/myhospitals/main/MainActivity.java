@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                             switch (id) {
                                 case R.id.nav_list:
                                     // Do nothing, we're already on that screen
-                                    break;
+                                    return true;
                                 case R.id.nav_medicine:
                                     //TODO
                                     Timber.v("----- under construction1 ------");
@@ -81,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent =
                                             new Intent(MainActivity.this, TasksActivity.class);
                                     startActivity(intent);
-                                    break;
+                                    return true;
+                                case R.id.nav_schedule:
+                                    //TODO
+                                    Timber.v("----- under construction1 ------");
+                                    return true;
                                 default:
                                     break;
                             }

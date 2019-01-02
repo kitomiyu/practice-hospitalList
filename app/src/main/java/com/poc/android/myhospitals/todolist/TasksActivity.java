@@ -93,14 +93,18 @@ public class TasksActivity extends AppCompatActivity {
                             switch (id) {
                                 case R.id.nav_list:
                                     NavUtils.navigateUpFromSameTask(TasksActivity.this);
-                                    break;
+                                    return true;
                                 case R.id.nav_medicine:
                                     //TODO
                                     Timber.v("----- under construction1 ------");
                                     return true;
                                 case R.id.nav_todo:
                                     // Do nothing, we're already on that screen
-                                    break;
+                                    return true;
+                                case R.id.nav_schedule:
+                                    //TODO
+                                    Timber.v("----- under construction1 ------");
+                                    return true;
                                 default:
                                     break;
                             }
